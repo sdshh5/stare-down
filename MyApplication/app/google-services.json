@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "613308775903",
+    "firebase_url": "https://stare-down-3bda8.firebaseio.com",
+    "project_id": "stare-down-3bda8",
+    "storage_bucket": "stare-down-3bda8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613308775903:android:67a3d4a17623b87e89586a",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613308775903-ro229uo641fv0icoca1jr196fkp4jtrt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDotNzFYmLrs2g7PzU2NlrzlcG3Snn7S1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613308775903-ro229uo641fv0icoca1jr196fkp4jtrt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
