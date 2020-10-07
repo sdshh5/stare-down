@@ -43,12 +43,14 @@ public class RegistActivity extends AppCompatActivity {
                 final String email = newEmailEditText.getText().toString().trim();
                 final String pw = newPWEditText.getText().toString().trim();
                 final String nickname = nicknameEditText.getText().toString().trim();
-
+                final UserData userData = new UserData(email, nickname, pw);
+                databaseReference.child("User").push().setValue(userData);
                 firebaseAuth.createUserWithEmailAndPassword(email, pw).addOnCompleteListener(RegistActivity.this, new OnCompleteListener<AuthResult>(){
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task){
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(RegistActivity.this, MenuActivity.class);
+                            Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
+                            Toast.makeText(getApplicationContext(), "Welcome, " + userData.getUserNickname() + "!", Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                             finish();
                         }else{
@@ -60,4 +62,6 @@ public class RegistActivity extends AppCompatActivity {
             }
         });
     }
+
 }
+

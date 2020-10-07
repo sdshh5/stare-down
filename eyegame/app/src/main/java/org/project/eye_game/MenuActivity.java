@@ -1,65 +1,45 @@
 package org.project.eye_game;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-
 public class MenuActivity extends AppCompatActivity {
-    private Button loginButton;
-    private Button registButton;
-    private EditText emailEditText;
-    private EditText pwEditText;
-    FirebaseAuth firebaseAuth;
+    ImageButton settingButton;
+    TextView nicknameTextView;
+    String nickname;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        loginButton = (Button)findViewById(R.id.logInButton);
-        registButton = (Button)findViewById(R.id.registerButton);
-        emailEditText = (EditText)findViewById(R.id.loginEmailEditText);
-        pwEditText = (EditText)findViewById(R.id.loginPasswordEditText);
+        Intent receivedIntent = getIntent();
+        nickname = receivedIntent.getExtras().getString("nickname");
+        email = receivedIntent.getExtras().getString("email");
 
-        firebaseAuth = firebaseAuth.getInstance();
+        Toast.makeText(getApplicationContext(), "Hello, " + nickname + "!", Toast.LENGTH_LONG);
 
-        loginButton.setOnClickListener(new View.OnClickListener(){
+        nicknameTextView = (TextView)findViewById(R.id.nicknameTextView);
+        nicknameTextView.append(nickname+"!");
+
+        settingButton = (ImageButton)findViewById(R.id.SettingButton);
+        settingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String email = emailEditText.getText().toString().trim();
-                String pw = pwEditText.getText().toString().trim();
-
-                firebaseAuth.signInWithEmailAndPassword(email, pw).addOnCompleteListener(MenuActivity.this, new OnCompleteListener<AuthResult>(){
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task){
-                        if(task.isSuccessful()){
-                            Intent intent = new Intent(MenuActivity.this, MenuActivity2.class);
-                            startActivity(intent);
-                        } else{
-                            Toast.makeText(MenuActivity.this, "Log In Failure", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                intent.putExtra("nickname", nickname);
+                intent.putExtra("email", email);
+                startActivity(intent);
             }
         });
 
-        registButton.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View v){
-               Intent intent = new Intent(MenuActivity.this, RegistActivity.class);
-               startActivity(intent);
-           }
-        });
     }
 }

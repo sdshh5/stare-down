@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuActivity">
+    tools:context=".SettingActivity">
 
     <ImageView
         android:id="@+id/main_background"
@@ -22,28 +22,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="STARE DOWN"
-        android:textSize="50dp"
         android:textColor="#aaffffff"
+        android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037"
-        />
+        app:layout_constraintVertical_bias="0.037" />
 
-    <ImageButton
-        android:id="@+id/SettingButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="#00ff0000"
-        android:scaleType="centerInside"
-        android:src="@drawable/setting_icon"
+    <Button
+        android:id="@+id/turnBackButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BACK"
+        android:textSize="20dp"
+        android:background="#55ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintTop_toBottomOf="@+id/MenuTitleTextView"
+        app:layout_constraintVertical_bias="0.937" />
 
     <TextView
         android:id="@+id/nicknameTextView"
