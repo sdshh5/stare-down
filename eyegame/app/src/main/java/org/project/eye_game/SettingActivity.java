@@ -29,11 +29,7 @@ public class SettingActivity extends AppCompatActivity {
         Button backButton = (Button)findViewById(R.id.turnBackButton);
         backButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                startActivity(intent);
-                finish();
-            }
+            public void onClick(View v){ finish(); }
         });
 
     }

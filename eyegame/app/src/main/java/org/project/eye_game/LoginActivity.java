@@ -49,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task){
                         if(task.isSuccessful()){
-                            //Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-
                             DatabaseReference databaseReference = firebaseDatabase.getReference();
                             databaseReference.child("User").addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -67,15 +65,9 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     }
                                 }
-
                                 @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
+                                public void onCancelled(@NonNull DatabaseError error) { }
                             });
-
-                            //startActivity(intent);
-                            //finish();
                         } else{
                             Toast.makeText(LoginActivity.this, "Log In Failure", Toast.LENGTH_SHORT).show();
                         }

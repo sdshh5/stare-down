@@ -53,10 +53,58 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="12dp"
         android:text="Hi, "
-        android:textSize="15dp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/SettingButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MenuTitleTextView" />
+
+    <ImageButton
+        android:id="@+id/quickStartButton"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="#00ff0000"
+        android:scaleType="center"
+        android:src="@drawable/play_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MenuTitleTextView"
+        app:layout_constraintVertical_bias="0.209" />
+
+    <Button
+        android:id="@+id/generateRoomButton"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:text="Make room"
+        android:textSize="25dp"
+        android:background="#55ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quickStartButton" />
+
+    <Button
+        android:id="@+id/enterRoomButton"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="enter room"
+        android:background="#55ffffff"
+        android:textSize="25dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generateRoomButton" />
+
+    <TextView
+        android:id="@+id/quickStartTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="quick start"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/quickStartButton"
+        app:layout_constraintEnd_toEndOf="@+id/quickStartButton"
+        app:layout_constraintStart_toStartOf="@+id/quickStartButton"
+        app:layout_constraintTop_toTopOf="@+id/quickStartButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "org.project.eye_game"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -20,6 +20,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    // modify
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
 }
 
 dependencies {
@@ -33,6 +40,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation platform('com.google.firebase:firebase-bom:25.11.0')
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
+
+    // modify
+    implementation 'org.webrtc:google-webrtc:1.0.+'
+    implementation files('libs/autobanh.jar')
 }
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'

@@ -4,6 +4,9 @@ public class UserData {
     private String userEmail;
     private String userNickname;
     private String userPW;
+    private int win;
+    private int lose;
+
     public UserData(String email, String nickname, String pw){
         this.userNickname = nickname;
         this.userEmail = email;
