@@ -49,9 +49,7 @@ public class RegistActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task){
                         if(task.isSuccessful()){
-//                            Intent intent = new Intent(RegistActivity.this, LoginActivity.class);
                             Toast.makeText(getApplicationContext(), "Welcome, " + userData.getUserNickname() + "!", Toast.LENGTH_SHORT).show();
-//                            startActivity(intent);
                             finish();
                         }else{
                             Toast.makeText(RegistActivity.this, "REGIST Failure", Toast.LENGTH_SHORT).show();
