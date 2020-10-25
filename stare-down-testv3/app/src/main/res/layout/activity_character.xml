@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharacterActivity">
+
+    <Button
+        android:id="@+id/nicknameChangeButton"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="5dp"
+        android:background="#33ffffff"
+        android:text="CHANGE"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/nicknameTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/character_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/nicknameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
+        android:textSize="15dp"
+        android:text="NICKNAME: "
+        app:layout_constraintStart_toEndOf="@+id/characterView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/emailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="EMAIL: "
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/characterView"
+        app:layout_constraintTop_toBottomOf="@+id/nicknameTextView" />
+
+    <TextView
+        android:id="@+id/totalRankingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="TOTAL RANKING: "
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/characterView"
+        app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
+
+    <TextView
+        android:id="@+id/EXPTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="TOTAL EXP: "
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/characterView"
+        app:layout_constraintTop_toBottomOf="@+id/totalRankingTextView" />
+
+
+    <ImageView
+        android:id="@+id/characterView"
+        android:layout_width="130dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="15dp"
+        app:srcCompat="@drawable/character" />
+
+    <GridView
+        android:id="@+id/characterGridView"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="2dp"
+        android:numColumns="2"
+        app:layout_constraintBottom_toBottomOf="@+id/main_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></GridView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
