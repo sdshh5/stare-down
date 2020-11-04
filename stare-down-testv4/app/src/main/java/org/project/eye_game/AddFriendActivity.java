@@ -23,8 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddFriendActivity extends AppCompatActivity {
-    Intent receivedIntent;
-
     private View decorView;
     private int	uiOption;
 
@@ -43,18 +41,14 @@ public class AddFriendActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
+    String id;
     String email;
     String nickname;
 
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
-        receivedIntent = getIntent();
-        intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-        intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-        intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-        intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));
-        intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+        intent.putExtra("id", getIntent().getExtras().getString("id"));
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
@@ -77,9 +71,8 @@ public class AddFriendActivity extends AppCompatActivity {
 
         format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 
-        receivedIntent = getIntent();
-        email = receivedIntent.getExtras().getString("email");
-        nickname = receivedIntent.getExtras().getString("nickname");
+        id = getIntent().getExtras().getString("id");
+
         nicknameEditText = findViewById(R.id.nicknameSearchEditText);
         nicknameTextView = findViewById(R.id.nicknameTextView);
 
@@ -123,10 +116,10 @@ public class AddFriendActivity extends AppCompatActivity {
                     return;
                 }
                 else{
-                    FriendData friend = new FriendData(TargetNickname, TargetID, receivedIntent.getExtras().getString("id")+"TO"+TargetID);
-                    FriendData user = new FriendData(nickname, receivedIntent.getExtras().getString("id"), receivedIntent.getExtras().getString("id")+ "TO" + TargetID);
+                    FriendData friend = new FriendData(TargetNickname, TargetID, id+"TO"+TargetID);
+                    FriendData user = new FriendData(nickname, id, id+ "TO" + TargetID);
                     databaseReference.child("chatRooms").child(friend.roomKey).push().setValue(new ChatMessage(nickname, "Hi!", format1.format(new Date())));
-                    databaseReference.child("friendList").child(receivedIntent.getExtras().getString("id")).push().setValue(friend);
+                    databaseReference.child("friendList").child(id).push().setValue(friend);
                     databaseReference.child("friendList").child(TargetID).push().setValue(user);
                 }
             }

@@ -84,36 +84,40 @@ public class MenuActivity extends AppCompatActivity {
 
         decorView.setSystemUiVisibility( uiOption );
 
-
-        Intent receivedIntent = getIntent();
-        nickname = receivedIntent.getExtras().getString("nickname");
-        email = receivedIntent.getExtras().getString("email");
-        exp = receivedIntent.getExtras().getInt("exp");
-        rank = receivedIntent.getExtras().getInt("rank");
-        id = receivedIntent.getExtras().getString("id");
-
+        id = getIntent().getExtras().getString("id");
         nicknameTextView = (TextView)findViewById(R.id.nicknameTextView);
-        nicknameTextView.append(nickname);
-
         expTextView = (TextView)findViewById(R.id.expTextView);
-        expTextView.append(Integer.toString(exp));
 
-        rankTextView = (TextView)findViewById(R.id.rankingTextView);
-        if(rank==0){
-            rankTextView.append("NONE");
-        }else{
-            rankTextView.append(Integer.toString(rank));
-        }
+        databaseReference.child("User").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot keys : snapshot.getChildren()){
+                    String _id = keys.child("id").getValue(String.class);
+                    if(id.equals(_id)){
+                        nickname = keys.child("nickname").getValue(String.class);
+                        email = keys.child("email").getValue(String.class);
+                        rank = keys.child("totalRank").getValue(int.class);
+                        exp = keys.child("totalEXP").getValue(int.class);
+                        nicknameTextView.append(nickname);
+                        expTextView.append(Integer.toString(exp));
+                        rankTextView = (TextView)findViewById(R.id.rankingTextView);
+                        if(rank==0){
+                            rankTextView.append("NONE");
+                        }else{
+                            rankTextView.append(Integer.toString(rank));
+                        }
 
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
         profileButton = findViewById(R.id.SettingButton);
         profileButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), CharacterActivity.class);
-                intent.putExtra("nickname",nickname);
-                intent.putExtra("email", email);
-                intent.putExtra("rank", rank);
-                intent.putExtra("exp", exp);
                 intent.putExtra("id", id);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
@@ -127,9 +131,6 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), GlobalChatActivity.class);
                 intent.putExtra("nickname", nickname);
-                intent.putExtra("email", email);
-                intent.putExtra("rank", rank);
-                intent.putExtra("exp", exp);
                 intent.putExtra("id",id);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);

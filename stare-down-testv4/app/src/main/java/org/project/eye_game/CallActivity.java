@@ -195,13 +195,11 @@ public class CallActivity extends Activity implements org.project.eye_game.AppRT
 
   @Override
   public void onBackPressed(){
-    Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
+    Intent intent = new Intent(getApplicationContext(), PrivatechatActivity.class);
     receivedIntent = getIntent();
     intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-    intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-    intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-    intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));;
     intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+    intent.putExtra("friendNickname", receivedIntent.getExtras().getString("friendNickname"));
     intent.putExtra("roomKey", receivedIntent.getExtras().getString("roomKey"));
     startActivity(intent);
     overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);

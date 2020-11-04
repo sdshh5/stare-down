@@ -99,14 +99,8 @@ public class LoginActivity extends AppCompatActivity {
                                         String userEmail = keys.child("email").getValue(String.class);
                                         if(email.equals(userEmail)){
                                             String userNickname = keys.child("nickname").getValue(String.class);
-                                            int rank = keys.child("totalRank").getValue(int.class);
-                                            int exp = keys.child("totalEXP").getValue(int.class);
                                             String id = keys.child("id").getValue(String.class);
                                             Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                                            intent.putExtra("nickname", userNickname);
-                                            intent.putExtra("email", userEmail);
-                                            intent.putExtra("rank", rank);
-                                            intent.putExtra("exp", exp);
                                             intent.putExtra("id", id);
                                             Toast.makeText(getApplicationContext(), "Hello, " + userNickname + "!", Toast.LENGTH_LONG).show();
                                             emailEditText.setText("");

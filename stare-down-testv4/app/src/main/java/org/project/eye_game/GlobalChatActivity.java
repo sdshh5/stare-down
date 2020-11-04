@@ -27,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GlobalChatActivity extends AppCompatActivity {
-    Intent receivedIntent;
     EditText messageView;
     Button sendButton;
     String nickname;
@@ -45,12 +44,7 @@ public class GlobalChatActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-        receivedIntent = getIntent();
-        intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-        intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-        intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-        intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));;
-        intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+        intent.putExtra("id", getIntent().getExtras().getString("id"));
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
@@ -72,8 +66,7 @@ public class GlobalChatActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility( uiOption );
 
         format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
-        receivedIntent = getIntent();
-        nickname = receivedIntent.getExtras().getString("nickname");
+        nickname = getIntent().getExtras().getString("nickname");
 
         messageView = findViewById(R.id.messageEditText);
         sendButton = findViewById(R.id.sendButton);

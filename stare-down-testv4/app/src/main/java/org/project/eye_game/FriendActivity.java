@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,11 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class FriendActivity extends AppCompatActivity {
-    Intent receivedIntent;
     Button friendAddButton;
 
-    String email;
-    String nickname;
+    String id_;
 
     ListView friendList;
     String[] roomKeyList;
@@ -44,12 +43,7 @@ public class FriendActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), CharacterActivity.class);
-        receivedIntent = getIntent();
-        intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-        intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-        intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-        intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));;
-        intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+        intent.putExtra("id", getIntent().getExtras().getString("id"));
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
@@ -75,12 +69,11 @@ public class FriendActivity extends AppCompatActivity {
         nicknameList = new String[100];
         roomKeyPointer = -1;
 
-        receivedIntent = getIntent();
-        email = receivedIntent.getExtras().getString("email");
-        nickname = receivedIntent.getExtras().getString("nickname");
+        id_ = getIntent().getExtras().getString("id");
+
         friendList = (ListView) findViewById(R.id.friendListView);
         adapter = new FriendListAdapter();
-        databaseReference.child("friendList").child(receivedIntent.getExtras().getString("id")).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("friendList").child(id_).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot keys : snapshot.getChildren()) {
@@ -103,17 +96,30 @@ public class FriendActivity extends AppCompatActivity {
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), PrivatechatActivity.class);
-                intent.putExtra("nickname", receivedIntent.getExtras().getString("nickname"));
-                intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-                intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-                intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));
-                intent.putExtra("id", receivedIntent.getExtras().getString("id"));
-                intent.putExtra("friendNickname", nicknameList[position]);
-                intent.putExtra("roomKey", roomKeyList[position]);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                finish();
+                databaseReference.child("User").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot keys : snapshot.getChildren()){
+                            String _id = keys.child("id").getValue(String.class);
+                            if(_id.equals(id_)){
+                                Log.d("INTOPRIVATE", "True");
+                                Intent intent = new Intent(getApplicationContext(), PrivatechatActivity.class);
+                                intent.putExtra("id", id_);
+                                intent.putExtra("nickname", keys.child("nickname").getValue(String.class));
+                                intent.putExtra("friendNickname", nicknameList[position]);
+                                intent.putExtra("roomKey", roomKeyList[position]);
+                                startActivity(intent);
+                                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                                finish();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
 
@@ -122,12 +128,7 @@ public class FriendActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), AddFriendActivity.class);
-                receivedIntent = getIntent();
-                intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-                intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-                intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-                intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));;
-                intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+                intent.putExtra("id", getIntent().getExtras().getString("id"));
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 finish();

@@ -621,9 +621,7 @@ public class ConnectActivity extends Activity {
 
       Intent receivedIntent = getIntent();
       intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-      intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-      intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-      intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));;
+      intent.putExtra("friendNickname", receivedIntent.getExtras().getString("friendNickname"));
       intent.putExtra("id", receivedIntent.getExtras().getString("id"));
       intent.putExtra("roomKey", receivedIntent.getExtras().getString("roomID"));
       startActivityForResult(intent, CONNECTION_REQUEST);

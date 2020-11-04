@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +22,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PrivatechatActivity extends AppCompatActivity {
-    Intent receivedIntent;
     EditText messageView;
     Button sendButton;
     Button callButton;
+    String id;
     String nickname;
     String roomKey;
 
@@ -40,12 +41,7 @@ public class PrivatechatActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
-        receivedIntent = getIntent();
-        intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-        intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-        intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-        intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));;
-        intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+        intent.putExtra("id", getIntent().getExtras().getString("id"));
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
@@ -55,7 +51,6 @@ public class PrivatechatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privatechat);
-
 
         decorView = getWindow().getDecorView();
         uiOption = getWindow().getDecorView().getSystemUiVisibility();
@@ -69,9 +64,9 @@ public class PrivatechatActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility( uiOption );
 
         format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
-        receivedIntent = getIntent();
-        nickname = receivedIntent.getExtras().getString("nickname");
-        roomKey = receivedIntent.getExtras().getString("roomKey");
+        id = getIntent().getExtras().getString("id");
+        nickname = getIntent().getExtras().getString("nickname");
+        roomKey = getIntent().getExtras().getString("roomKey");
 
         messageView = findViewById(R.id.messageEditText);
         sendButton = findViewById(R.id.sendButton);
@@ -90,6 +85,8 @@ public class PrivatechatActivity extends AppCompatActivity {
 
         listView =  findViewById(R.id.listView);
         adapter = new ChatAdapter();
+
+        Log.d("ROOM_KEY", roomKey);
 
         databaseReference.child("chatRooms").child(roomKey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -162,12 +159,10 @@ public class PrivatechatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
-                intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-                intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-                intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-                intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));;
-                intent.putExtra("id", receivedIntent.getExtras().getString("id"));
-                intent.putExtra("roomID",receivedIntent.getExtras().getString("roomKey"));
+                intent.putExtra("nickname", getIntent().getExtras().getString("nickname"));
+                intent.putExtra("friendNickname", getIntent().getExtras().getString("friendNickname"));
+                intent.putExtra("id", getIntent().getExtras().getString("id"));
+                intent.putExtra("roomID", getIntent().getExtras().getString("roomKey"));
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 finish();

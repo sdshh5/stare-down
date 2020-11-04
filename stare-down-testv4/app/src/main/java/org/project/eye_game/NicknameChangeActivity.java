@@ -17,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class NicknameChangeActivity extends AppCompatActivity {
-    Intent receivedIntent;
     Button changeButton;
     EditText newNicknameTextView;
 
@@ -45,12 +44,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), CharacterActivity.class);
-        receivedIntent = getIntent();
-        intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-        intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-        intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-        intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));;
-        intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+        intent.putExtra("id", getIntent().getExtras().getString("id"));
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
@@ -71,9 +65,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
 
         decorView.setSystemUiVisibility( uiOption );
 
-        receivedIntent = getIntent();
-        email = receivedIntent.getExtras().getString("email");
-        nickname = receivedIntent.getExtras().getString("nickname");
+        id = getIntent().getExtras().getString("id");
 
         newNicknameTextView = findViewById(R.id.newNicknameEditText);
 
@@ -85,8 +77,8 @@ public class NicknameChangeActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for(DataSnapshot keys : snapshot.getChildren()) {
-                            String userEmail = keys.child("email").getValue(String.class);
-                            if (email.equals(userEmail)) {
+                            String _id = keys.child("id").getValue(String.class);
+                            if (id.equals(_id)) {
                                 TotalEXP = keys.child("totalEXP").getValue(int.class);
                                 TotalRank = keys.child("totalRank").getValue(int.class);
                                 Rank1 = keys.child("rank1").getValue(int.class);
@@ -97,8 +89,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
                                 EXP2 = keys.child("exp2").getValue(int.class);
                                 EXP3 = keys.child("exp3").getValue(int.class);
                                 EXP4 = keys.child("exp4").getValue(int.class);
-                                id = keys.child("id").getValue(String.class);
-
+                                email = keys.child("email").getValue(String.class);
                                 nickname = newNicknameTextView.getText().toString();
 
                                 UserData newUser = new UserData(email, nickname, id);
@@ -116,11 +107,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
                                 keys.getRef().setValue(newUser);
 
                                 Intent intent = new Intent(getApplicationContext(), CharacterActivity.class);
-                                intent.putExtra("nickname",nickname);
-                                intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-                                intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-                                intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));;
-                                intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+                                intent.putExtra("id", id);
                                 startActivity(intent);
                                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                                 finish();

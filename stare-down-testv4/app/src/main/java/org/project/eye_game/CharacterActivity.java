@@ -45,7 +45,6 @@ public class CharacterActivity extends AppCompatActivity {
 
     final int FROM_ALBUM = 100;
 
-    Intent receivedIntent;
     String email;
     String nickname;
     int TotalRank;
@@ -79,12 +78,7 @@ public class CharacterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-        receivedIntent = getIntent();
-        intent.putExtra("nickname", receivedIntent.getExtras().getString("nickname"));
-        intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-        intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-        intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));
-        intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+        intent.putExtra("id", getIntent().getExtras().getString("id"));
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
@@ -112,18 +106,14 @@ public class CharacterActivity extends AppCompatActivity {
         rankView = findViewById(R.id.totalRankingTextView);
         emailView = findViewById(R.id.emailTextView);
 
-        receivedIntent = getIntent();
-        email = receivedIntent.getExtras().getString("email");
-        nickname = receivedIntent.getExtras().getString("nickname");
-        nicknameView.append(nickname);
-        emailView.append(email);
+        id = getIntent().getExtras().getString("id");
 
         databaseReference.child("User").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot keys : snapshot.getChildren()) {
-                    String userEmail = keys.child("email").getValue(String.class);
-                    if (email.equals(userEmail)) {
+                    String _id = keys.child("id").getValue(String.class);
+                    if (id.equals(_id)) {
                         TotalEXP = keys.child("totalEXP").getValue(int.class);
                         TotalRank = keys.child("totalRank").getValue(int.class);
                         Rank1 = keys.child("rank1").getValue(int.class);
@@ -134,6 +124,11 @@ public class CharacterActivity extends AppCompatActivity {
                         EXP2 = keys.child("exp2").getValue(int.class);
                         EXP3 = keys.child("exp3").getValue(int.class);
                         EXP4 = keys.child("exp4").getValue(int.class);
+                        nickname = keys.child("nickname").getValue(String.class);
+                        email = keys.child("email").getValue(String.class);
+
+                        nicknameView.append(nickname);
+                        emailView.append(email);
 
                         EXPView.append(Integer.toString(TotalEXP));
                         if (TotalRank == 0) {
@@ -166,11 +161,7 @@ public class CharacterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), NicknameChangeActivity.class);
-                intent.putExtra("nickname", receivedIntent.getExtras().getString("nickname"));
-                intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-                intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-                intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));
-                intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+                intent.putExtra("id", getIntent().getExtras().getString("id"));
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
@@ -182,11 +173,7 @@ public class CharacterActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
-                intent.putExtra("nickname", receivedIntent.getExtras().getString("nickname"));
-                intent.putExtra("email", receivedIntent.getExtras().getString("email"));
-                intent.putExtra("rank", receivedIntent.getExtras().getInt("rank"));
-                intent.putExtra("exp", receivedIntent.getExtras().getInt("exp"));
-                intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+                intent.putExtra("id", getIntent().getExtras().getString("id"));
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
