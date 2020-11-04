@@ -7,70 +7,70 @@
 7
 8    <uses-sdk
 9        android:minSdkVersion="21"
-9-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml
+9-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml
 10        android:targetSdkVersion="29" />
-10-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml
+10-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml
 11
 12    <!-- <uses-sdk -->
 13    <!-- tools:overrideLibrary=" -->
 14    <!-- androidx.camera.camera2, androidx.camera.core, -->
 15    <!-- androidx.camera.view, androidx.camera.lifecycle" /> -->
 16    <uses-feature android:name="android.hardware.camera" />
-16-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:12:5-59
-16-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:12:19-57
+16-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:12:5-59
+16-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:12:19-57
 17
 18    <uses-permission android:name="android.permission.CAMERA" />
-18-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:13:5-64
-18-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:13:22-62
+18-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:13:5-64
+18-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:13:22-62
 19
 20    <application
-20-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:15:5-41:19
+20-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:15:5-41:19
 21        android:name="androidx.multidex.MultiDexApplication"
-21-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:16:9-61
+21-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:16:9-61
 22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 22-->[androidx.core:core:1.3.1] C:\Users\sdshh\.gradle\caches\transforms-2\files-2.1\0c50ec4950e924861018d0425158d1e6\core-1.3.1\AndroidManifest.xml:24:18-86
 23        android:icon="@mipmap/ic_launcher"
-23-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:17:9-43
+23-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:17:9-43
 24        android:label="Stare-Down"
-24-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:18:9-35
+24-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:18:9-35
 25        android:testOnly="true"
 26        android:theme="@style/Theme.AppCompat" >
-26-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:19:9-47
+26-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:19:9-47
 27        <meta-data
-27-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:21:9-23:68
+27-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:21:9-23:68
 28            android:name="com.google.android.gms.version"
-28-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:22:13-58
+28-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:22:13-58
 29            android:value="@integer/google_play_services_version" />
-29-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:23:13-66
+29-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:23:13-66
 30
 31        <!--
 32          Optional: Add it to automatically download ML model to device after
 33          your app is installed.
 34        -->
 35        <meta-data
-35-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:27:9-29:51
+35-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:27:9-29:51
 36            android:name="com.google.mlkit.vision.DEPENDENCIES"
-36-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:28:13-64
+36-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:28:13-64
 37            android:value="barcode,face,ocr,ica" />
-37-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:29:13-49
+37-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:29:13-49
 38
 39        <activity
-39-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:31:9-39:20
+39-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:31:9-39:20
 40            android:name="com.google.mlkit.vision.LivePreviewActivity"
-40-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:32:13-48
+40-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:32:13-48
 41            android:exported="true"
-41-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:33:13-36
+41-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:33:13-36
 42            android:theme="@style/AppTheme" >
-42-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:34:13-44
+42-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:34:13-44
 43            <intent-filter>
-43-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:35:13-38:29
+43-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:35:13-38:29
 44                <action android:name="android.intent.action.MAIN" />
-44-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:36:17-68
-44-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:36:25-66
+44-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:36:17-68
+44-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:36:25-66
 45
 46                <category android:name="android.intent.category.LAUNCHER" />
-46-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:37:17-76
-46-->C:\Users\sdshh\AndroidStudioProjects\vision-quickstart\app\src\main\AndroidManifest.xml:37:27-74
+46-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:37:17-76
+46-->C:\Users\sdshh\AndroidStudioProjects\team7\vision-quickstart\app\src\main\AndroidManifest.xml:37:27-74
 47            </intent-filter>
 48        </activity>
 49

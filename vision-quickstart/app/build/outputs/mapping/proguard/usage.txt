@@ -13030,10 +13030,10 @@ com.google.android.gms.internal.vision.zzid$zzd:
 androidx.appcompat.view.StandaloneActionMode:
     private boolean mFocusable
 com.google.android.gms.internal.mlkit_vision_common.zzeo
+androidx.camera.camera2.internal.-$$Lambda$U7YGfX89lmJkjkmxjZTvW1-ZUo0
+androidx.camera.camera2.-$$Lambda$Camera2Config$mYXXnxW6sa_oF7xhp51ozRSO_ck:
+    public final androidx.camera.core.impl.CameraDeviceSurfaceManager newInstance(android.content.Context)
 androidx.camera.camera2.-$$Lambda$LGbwJFn1EYEiFTe4QSUMXizKEuU:
     public final androidx.camera.core.impl.CameraFactory newInstance(android.content.Context,androidx.camera.core.impl.CameraThreadConfig)
 androidx.camera.camera2.-$$Lambda$Camera2Config$pKz61QSIMP944Kt2USWec22ELsc:
     public final androidx.camera.core.impl.UseCaseConfigFactory newInstance(android.content.Context)
-androidx.camera.camera2.internal.-$$Lambda$U7YGfX89lmJkjkmxjZTvW1-ZUo0
-androidx.camera.camera2.-$$Lambda$Camera2Config$mYXXnxW6sa_oF7xhp51ozRSO_ck:
-    public final androidx.camera.core.impl.CameraDeviceSurfaceManager newInstance(android.content.Context)

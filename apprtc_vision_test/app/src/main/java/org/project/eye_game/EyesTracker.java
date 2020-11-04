@@ -18,13 +18,13 @@ public class EyesTracker extends Tracker<Face> {
 
     @Override
     public void onUpdate(Detector.Detections<Face> detections, Face face) {
-        if (face.getIsLeftEyeOpenProbability() > THRESHOLD && face.getIsRightEyeOpenProbability() > THRESHOLD) {
-            Log.i(TAG, "onUpdate: Open Eyes Detected");
-            ((MainActivity)context).updateState("USER_EYES_OPEN");
+        if (face.getIsLeftEyeOpenProbability() < THRESHOLD || face.getIsRightEyeOpenProbability() < THRESHOLD) {
+            Log.i(TAG, "onUpdate: Close Eyes Detected");
+            ((CallActivity)context).updateState("USER_EYES_CLOSED");
         }
         else {
-            Log.i(TAG, "onUpdate: Close Eyes Detected");
-            ((MainActivity)context).updateState("USER_EYES_CLOSED");
+            Log.i(TAG, "onUpdate: Open Eyes Detected");
+            ((CallActivity)context).updateState("USER_EYES_OPEN");
         }
     }
 
@@ -32,7 +32,7 @@ public class EyesTracker extends Tracker<Face> {
     public void onMissing(Detector.Detections<Face> detections) {
         super.onMissing(detections);
         Log.i(TAG, "onUpdate: Face Not Detected!");
-        ((MainActivity)context).updateState("FACE_NOT_FOUND");
+        ((CallActivity)context).updateState("FACE_NOT_FOUND");
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\sdshh\\AndroidStudioProjects\\vision-quickstart\\app\\build\\intermediates\\incremental\\mergeProguardResources\\merged.dir\\values-da\\values-da.xml",
+            "outputFile": "C:\\Users\\sdshh\\AndroidStudioProjects\\team7\\vision-quickstart\\app\\build\\intermediates\\incremental\\mergeProguardResources\\merged.dir\\values-da\\values-da.xml",
             "map": [
                 {
                     "source": "C:\\Users\\sdshh\\.gradle\\caches\\transforms-2\\files-2.1\\f300925f8a4c001b996b538d1fee543f\\jetified-play-services-base-17.0.0\\res\\values-da\\values.xml",

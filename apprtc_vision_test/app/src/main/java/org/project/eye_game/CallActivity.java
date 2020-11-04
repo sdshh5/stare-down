@@ -38,7 +38,10 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.MultiProcessor;
+import com.google.android.gms.vision.Tracker;
+import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
 import java.io.IOException;
@@ -46,6 +49,7 @@ import java.lang.RuntimeException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import org.project.eye_game.AppRTCAudioManager.AudioDevice;
 import org.project.eye_game.AppRTCAudioManager.AudioManagerEvents;
 import org.project.eye_game.AppRTCClient.RoomConnectionParameters;
@@ -70,6 +74,8 @@ import org.webrtc.VideoFileRenderer;
 import org.webrtc.VideoFrame;
 import org.webrtc.VideoSink;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 /**
  * Activity for peer connection call setup, call waiting
  * and call view.
@@ -77,194 +83,85 @@ import org.webrtc.VideoSink;
 public class CallActivity extends Activity implements org.project.eye_game.AppRTCClient.SignalingEvents,
         org.project.eye_game.PeerConnectionClient.PeerConnectionEvents,
         org.project.eye_game.CallFragment.OnCallEvents {
-  private static final String TAG = "CallRTCClient";
 
-  public static final String EXTRA_ROOMID = "org.appspot.apprtc.ROOMID";
-  public static final String EXTRA_URLPARAMETERS = "org.appspot.apprtc.URLPARAMETERS";
-  public static final String EXTRA_LOOPBACK = "org.appspot.apprtc.LOOPBACK";
-  public static final String EXTRA_VIDEO_CALL = "org.appspot.apprtc.VIDEO_CALL";
-  public static final String EXTRA_SCREENCAPTURE = "org.appspot.apprtc.SCREENCAPTURE";
-  public static final String EXTRA_CAMERA2 = "org.appspot.apprtc.CAMERA2";
-  public static final String EXTRA_VIDEO_WIDTH = "org.appspot.apprtc.VIDEO_WIDTH";
-  public static final String EXTRA_VIDEO_HEIGHT = "org.appspot.apprtc.VIDEO_HEIGHT";
-  public static final String EXTRA_VIDEO_FPS = "org.appspot.apprtc.VIDEO_FPS";
-  public static final String EXTRA_VIDEO_CAPTUREQUALITYSLIDER_ENABLED =
-      "org.appsopt.apprtc.VIDEO_CAPTUREQUALITYSLIDER";
-  public static final String EXTRA_VIDEO_BITRATE = "org.appspot.apprtc.VIDEO_BITRATE";
-  public static final String EXTRA_VIDEOCODEC = "org.appspot.apprtc.VIDEOCODEC";
-  public static final String EXTRA_HWCODEC_ENABLED = "org.appspot.apprtc.HWCODEC";
-  public static final String EXTRA_CAPTURETOTEXTURE_ENABLED = "org.appspot.apprtc.CAPTURETOTEXTURE";
-  public static final String EXTRA_FLEXFEC_ENABLED = "org.appspot.apprtc.FLEXFEC";
-  public static final String EXTRA_AUDIO_BITRATE = "org.appspot.apprtc.AUDIO_BITRATE";
-  public static final String EXTRA_AUDIOCODEC = "org.appspot.apprtc.AUDIOCODEC";
-  public static final String EXTRA_NOAUDIOPROCESSING_ENABLED =
-      "org.appspot.apprtc.NOAUDIOPROCESSING";
-  public static final String EXTRA_AECDUMP_ENABLED = "org.appspot.apprtc.AECDUMP";
-  public static final String EXTRA_SAVE_INPUT_AUDIO_TO_FILE_ENABLED =
-      "org.appspot.apprtc.SAVE_INPUT_AUDIO_TO_FILE";
-  public static final String EXTRA_OPENSLES_ENABLED = "org.appspot.apprtc.OPENSLES";
-  public static final String EXTRA_DISABLE_BUILT_IN_AEC = "org.appspot.apprtc.DISABLE_BUILT_IN_AEC";
-  public static final String EXTRA_DISABLE_BUILT_IN_AGC = "org.appspot.apprtc.DISABLE_BUILT_IN_AGC";
-  public static final String EXTRA_DISABLE_BUILT_IN_NS = "org.appspot.apprtc.DISABLE_BUILT_IN_NS";
-  public static final String EXTRA_DISABLE_WEBRTC_AGC_AND_HPF =
-      "org.appspot.apprtc.DISABLE_WEBRTC_GAIN_CONTROL";
-  public static final String EXTRA_DISPLAY_HUD = "org.appspot.apprtc.DISPLAY_HUD";
-  public static final String EXTRA_TRACING = "org.appspot.apprtc.TRACING";
-  public static final String EXTRA_CMDLINE = "org.appspot.apprtc.CMDLINE";
-  public static final String EXTRA_RUNTIME = "org.appspot.apprtc.RUNTIME";
-  public static final String EXTRA_VIDEO_FILE_AS_CAMERA = "org.appspot.apprtc.VIDEO_FILE_AS_CAMERA";
-  public static final String EXTRA_SAVE_REMOTE_VIDEO_TO_FILE =
-      "org.appspot.apprtc.SAVE_REMOTE_VIDEO_TO_FILE";
-  public static final String EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH =
-      "org.appspot.apprtc.SAVE_REMOTE_VIDEO_TO_FILE_WIDTH";
-  public static final String EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT =
-      "org.appspot.apprtc.SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT";
-  public static final String EXTRA_USE_VALUES_FROM_INTENT =
-      "org.appspot.apprtc.USE_VALUES_FROM_INTENT";
-  public static final String EXTRA_DATA_CHANNEL_ENABLED = "org.appspot.apprtc.DATA_CHANNEL_ENABLED";
-  public static final String EXTRA_ORDERED = "org.appspot.apprtc.ORDERED";
-  public static final String EXTRA_MAX_RETRANSMITS_MS = "org.appspot.apprtc.MAX_RETRANSMITS_MS";
-  public static final String EXTRA_MAX_RETRANSMITS = "org.appspot.apprtc.MAX_RETRANSMITS";
-  public static final String EXTRA_PROTOCOL = "org.appspot.apprtc.PROTOCOL";
-  public static final String EXTRA_NEGOTIATED = "org.appspot.apprtc.NEGOTIATED";
-  public static final String EXTRA_ID = "org.appspot.apprtc.ID";
-  public static final String EXTRA_ENABLE_RTCEVENTLOG = "org.appspot.apprtc.ENABLE_RTCEVENTLOG";
+    private static final String TAG = "CallRTCClient";
+    public static final String EXTRA_ROOMID = "org.appspot.apprtc.ROOMID";
+    public static final String EXTRA_URLPARAMETERS = "org.appspot.apprtc.URLPARAMETERS";
+    public static final String EXTRA_LOOPBACK = "org.appspot.apprtc.LOOPBACK";
+    public static final String EXTRA_VIDEO_CALL = "org.appspot.apprtc.VIDEO_CALL";
+    public static final String EXTRA_SCREENCAPTURE = "org.appspot.apprtc.SCREENCAPTURE";
+    public static final String EXTRA_CAMERA2 = "org.appspot.apprtc.CAMERA2";
+    public static final String EXTRA_VIDEO_WIDTH = "org.appspot.apprtc.VIDEO_WIDTH";
+    public static final String EXTRA_VIDEO_HEIGHT = "org.appspot.apprtc.VIDEO_HEIGHT";
+    public static final String EXTRA_VIDEO_FPS = "org.appspot.apprtc.VIDEO_FPS";
+    public static final String EXTRA_VIDEO_CAPTUREQUALITYSLIDER_ENABLED =
+            "org.appsopt.apprtc.VIDEO_CAPTUREQUALITYSLIDER";
+    public static final String EXTRA_VIDEO_BITRATE = "org.appspot.apprtc.VIDEO_BITRATE";
+    public static final String EXTRA_VIDEOCODEC = "org.appspot.apprtc.VIDEOCODEC";
+    public static final String EXTRA_HWCODEC_ENABLED = "org.appspot.apprtc.HWCODEC";
+    public static final String EXTRA_CAPTURETOTEXTURE_ENABLED = "org.appspot.apprtc.CAPTURETOTEXTURE";
+    public static final String EXTRA_FLEXFEC_ENABLED = "org.appspot.apprtc.FLEXFEC";
+    public static final String EXTRA_AUDIO_BITRATE = "org.appspot.apprtc.AUDIO_BITRATE";
+    public static final String EXTRA_AUDIOCODEC = "org.appspot.apprtc.AUDIOCODEC";
+    public static final String EXTRA_NOAUDIOPROCESSING_ENABLED =
+            "org.appspot.apprtc.NOAUDIOPROCESSING";
+    public static final String EXTRA_AECDUMP_ENABLED = "org.appspot.apprtc.AECDUMP";
+    public static final String EXTRA_SAVE_INPUT_AUDIO_TO_FILE_ENABLED =
+            "org.appspot.apprtc.SAVE_INPUT_AUDIO_TO_FILE";
+    public static final String EXTRA_OPENSLES_ENABLED = "org.appspot.apprtc.OPENSLES";
+    public static final String EXTRA_DISABLE_BUILT_IN_AEC = "org.appspot.apprtc.DISABLE_BUILT_IN_AEC";
+    public static final String EXTRA_DISABLE_BUILT_IN_AGC = "org.appspot.apprtc.DISABLE_BUILT_IN_AGC";
+    public static final String EXTRA_DISABLE_BUILT_IN_NS = "org.appspot.apprtc.DISABLE_BUILT_IN_NS";
+    public static final String EXTRA_DISABLE_WEBRTC_AGC_AND_HPF =
+            "org.appspot.apprtc.DISABLE_WEBRTC_GAIN_CONTROL";
+    public static final String EXTRA_DISPLAY_HUD = "org.appspot.apprtc.DISPLAY_HUD";
+    public static final String EXTRA_TRACING = "org.appspot.apprtc.TRACING";
+    public static final String EXTRA_CMDLINE = "org.appspot.apprtc.CMDLINE";
+    public static final String EXTRA_RUNTIME = "org.appspot.apprtc.RUNTIME";
+    public static final String EXTRA_VIDEO_FILE_AS_CAMERA = "org.appspot.apprtc.VIDEO_FILE_AS_CAMERA";
+    public static final String EXTRA_SAVE_REMOTE_VIDEO_TO_FILE =
+            "org.appspot.apprtc.SAVE_REMOTE_VIDEO_TO_FILE";
+    public static final String EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_WIDTH =
+            "org.appspot.apprtc.SAVE_REMOTE_VIDEO_TO_FILE_WIDTH";
+    public static final String EXTRA_SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT =
+            "org.appspot.apprtc.SAVE_REMOTE_VIDEO_TO_FILE_HEIGHT";
+    public static final String EXTRA_USE_VALUES_FROM_INTENT =
+            "org.appspot.apprtc.USE_VALUES_FROM_INTENT";
+    public static final String EXTRA_DATA_CHANNEL_ENABLED = "org.appspot.apprtc.DATA_CHANNEL_ENABLED";
+    public static final String EXTRA_ORDERED = "org.appspot.apprtc.ORDERED";
+    public static final String EXTRA_MAX_RETRANSMITS_MS = "org.appspot.apprtc.MAX_RETRANSMITS_MS";
+    public static final String EXTRA_MAX_RETRANSMITS = "org.appspot.apprtc.MAX_RETRANSMITS";
+    public static final String EXTRA_PROTOCOL = "org.appspot.apprtc.PROTOCOL";
+    public static final String EXTRA_NEGOTIATED = "org.appspot.apprtc.NEGOTIATED";
+    public static final String EXTRA_ID = "org.appspot.apprtc.ID";
+    public static final String EXTRA_ENABLE_RTCEVENTLOG = "org.appspot.apprtc.ENABLE_RTCEVENTLOG";
 
-  private static final int CAPTURE_PERMISSION_REQUEST_CODE = 1;
+    private static final int CAPTURE_PERMISSION_REQUEST_CODE = 1;
 
-  // List of mandatory application permissions.
-  private static final String[] MANDATORY_PERMISSIONS = {"android.permission.MODIFY_AUDIO_SETTINGS",
-      "android.permission.RECORD_AUDIO", "android.permission.INTERNET"};
+    // List of mandatory application permissions.
+    private static final String[] MANDATORY_PERMISSIONS = {"android.permission.MODIFY_AUDIO_SETTINGS",
+            "android.permission.RECORD_AUDIO", "android.permission.INTERNET"};
 
-  // Peer connection statistics callback period in ms.
-  private static final int STAT_CALLBACK_PERIOD = 1000;
+    // Peer connection statistics callback period in ms.
+    private static final int STAT_CALLBACK_PERIOD = 1000;
 
-  private static class ProxyVideoSink implements VideoSink {
-    private VideoSink target;
-//    CameraSource cameraSource;
+    CameraSource cameraSource;
 
-    @Override
-    synchronized public void onFrame(VideoFrame frame) {
-//      if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
-//        Toast.makeText(this, "Permission not granted!\n Grant permission and restart app", Toast.LENGTH_SHORT).show();
-//      }else{
-//        initCameraSource();
-//      }
-      if (target == null) {
-        Logging.d(TAG, "Dropping frame in proxy because target is null.");
-        return;
-      }
+    public class ProxyVideoSink implements VideoSink {
+        private VideoSink target;
 
-      target.onFrame(frame);
+        @Override
+        synchronized public void onFrame(VideoFrame frame) {
+            if (target == null) {
+                Logging.d(TAG, "Dropping frame in proxy because target is null.");
+                return;
+            }
+            target.onFrame(frame);
+        }
+        synchronized public void setTarget(VideoSink target) {
+            this.target = target;
+        }
     }
-
-    synchronized public void setTarget(VideoSink target) {
-      this.target = target;
-    }
-
-//    private void initCameraSource() {
-//      FaceDetector detector = new FaceDetector.Builder(this)
-//              .setTrackingEnabled(true)
-//              .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
-//              .setMode(FaceDetector.FAST_MODE)
-//              .build();
-//      detector.setProcessor(new MultiProcessor.Builder(new FaceTrackerDaemon(CallActivity.this.getApplicationContext())).build());
-//
-//      cameraSource = new CameraSource.Builder(CallActivity.this.getApplicationContext(), detector)
-//              .setRequestedPreviewSize(1024, 768)
-//              .setFacing(CameraSource.CAMERA_FACING_FRONT)
-//              .setRequestedFps(5.0f)
-//              .build();
-//
-//      try {
-//        if (ActivityCompat.checkSelfPermission(CallActivity.this.getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//          // TODO: Consider calling
-//          //    ActivityCompat#requestPermissions
-//          // here to request the missing permissions, and then overriding
-//          //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//          //                                          int[] grantResults)
-//          // to handle the case where the user grants the permission. See the documentation
-//          // for ActivityCompat#requestPermissions for more details.
-//          return;
-//        }
-//        cameraSource.start();
-//      }
-//      catch (IOException e) {
-//        Toast.makeText(CallActivity.this.getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-//        e.printStackTrace();
-//      }
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//      super.onResume();
-//      if (cameraSource != null) {
-//        try {
-//          if (ActivityCompat.checkSelfPermission(CallActivity.this.getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//          }
-//          cameraSource.start();
-//        }
-//        catch (IOException e) {
-//          e.printStackTrace();
-//        }
-//      }
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//      super.onPause();
-//      if (cameraSource!=null) {
-//        cameraSource.stop();
-//      }
-//    }
-//
-//    @Override
-//    protected void onDestroy() {
-//      super.onDestroy();
-//      if (cameraSource!=null) {
-//        cameraSource.release();
-//      }
-//    }
-//
-//    public void updateState(String state){
-//      CallFragment callFragment = (CallFragment)getFragmentManager().findFragmentById(R.id.call_fragment_container);
-//      switch (state){
-//        case "USER_EYES_OPEN":
-//          runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//              callFragment.changeStateText("eye open");
-//            }
-//          });
-//          break;
-//        case "USER_EYES_CLOSED":
-//          runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//              callFragment.changeStateText("eye close");
-//            }
-//          });
-//          break;
-//        case "FACE_NOT_FOUND":
-//          runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//              callFragment.changeStateText("face not found");
-//            }
-//          });
-//          break;
-//      }
-//    }
-  }
 
   private final ProxyVideoSink remoteProxyRenderer = new ProxyVideoSink();
   private final ProxyVideoSink localProxyVideoSink = new ProxyVideoSink();
@@ -325,6 +222,12 @@ public class CallActivity extends Activity implements org.project.eye_game.AppRT
     super.onCreate(savedInstanceState);
     Thread.setDefaultUncaughtExceptionHandler(new org.project.eye_game.UnhandledExceptionHandler(this));
 
+    if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+      Toast.makeText(CallActivity.this, "Permission not granted!\n Grant permission and restart app", Toast.LENGTH_SHORT).show();
+    }else{
+        initCameraSource();
+    }
     // Set window styles for fullscreen-window size. Needs to be done before
     // adding content.
     requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -515,6 +418,98 @@ public class CallActivity extends Activity implements org.project.eye_game.AppRT
     }
   }
 
+  private void initCameraSource() {
+    FaceDetector detector = new FaceDetector.Builder(CallActivity.this)
+            .setTrackingEnabled(true)
+            .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
+            .setMode(FaceDetector.FAST_MODE)
+            .build();
+    detector.setProcessor(new MultiProcessor.Builder(new FaceTrackerDaemon(CallActivity.this)).build());
+
+    cameraSource = new CameraSource.Builder(CallActivity.this, detector)
+            .setRequestedPreviewSize(1024, 768)
+            .setFacing(CameraSource.CAMERA_FACING_FRONT)
+            .setRequestedFps(5.0f)
+            .build();
+
+    try {
+      if (ActivityCompat.checkSelfPermission(CallActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        // TODO: Consider calling
+        //    ActivityCompat#requestPermissions
+        // here to request the missing permissions, and then overriding
+        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+        //                                          int[] grantResults)
+        // to handle the case where the user grants the permission. See the documentation
+        // for ActivityCompat#requestPermissions for more details.
+        return;
+      }
+      cameraSource.start();
+    }
+    catch (IOException e) {
+      Toast.makeText(CallActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+      e.printStackTrace();
+    }
+  }
+
+  protected void onResume() {
+    super.onResume();
+    if (cameraSource != null) {
+      try {
+        if (ActivityCompat.checkSelfPermission(CallActivity.this.getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+          // TODO: Consider calling
+          //    ActivityCompat#requestPermissions
+          // here to request the missing permissions, and then overriding
+          //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+          //                                          int[] grantResults)
+          // to handle the case where the user grants the permission. See the documentation
+          // for ActivityCompat#requestPermissions for more details.
+          return;
+        }
+        cameraSource.start();
+      }
+      catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  protected void onPause() {
+    super.onPause();
+    if (cameraSource!=null) {
+      cameraSource.stop();
+    }
+  }
+
+  public void updateState(String state){
+    CallFragment callFragment = (CallFragment)getFragmentManager().findFragmentById(R.id.call_fragment_container);
+    switch (state){
+      case "USER_EYES_OPEN":
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            callFragment.changeStateText("eye open");
+          }
+        });
+        break;
+      case "USER_EYES_CLOSED":
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            callFragment.changeStateText("eye close");
+          }
+        });
+        break;
+      case "FACE_NOT_FOUND":
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            callFragment.changeStateText("face not found");
+          }
+        });
+        break;
+    }
+  }
+
   @TargetApi(17)
   private DisplayMetrics getDisplayMetrics() {
     DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -643,6 +638,9 @@ public class CallActivity extends Activity implements org.project.eye_game.AppRT
     }
     activityRunning = false;
     super.onDestroy();
+    if (cameraSource!=null) {
+      cameraSource.release();
+    }
   }
 
   // CallFragment.OnCallEvents interface implementation.
