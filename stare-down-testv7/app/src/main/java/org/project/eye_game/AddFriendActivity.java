@@ -42,13 +42,13 @@ public class AddFriendActivity extends AppCompatActivity {
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     String id;
-    String email;
     String nickname;
 
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
+        intent.putExtra("nickname", getIntent().getExtras().getString("nickname"));
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
@@ -72,6 +72,7 @@ public class AddFriendActivity extends AppCompatActivity {
         format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 
         id = getIntent().getExtras().getString("id");
+        nickname = getIntent().getExtras().getString("nickname");
 
         nicknameEditText = findViewById(R.id.nicknameSearchEditText);
         nicknameTextView = findViewById(R.id.nicknameTextView);

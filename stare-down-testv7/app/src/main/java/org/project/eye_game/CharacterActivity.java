@@ -207,6 +207,7 @@ public class CharacterActivity extends AppCompatActivity {
             public void onClick(View V) {
                 Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
                 intent.putExtra("id", getIntent().getExtras().getString("id"));
+                intent.putExtra("nickname", nickname);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();

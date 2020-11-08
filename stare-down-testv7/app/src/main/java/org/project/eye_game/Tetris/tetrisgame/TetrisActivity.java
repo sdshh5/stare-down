@@ -41,6 +41,8 @@ public class TetrisActivity extends AppCompatActivity {
         int BOARD_HEIGHT = 20;
 
         Player player = new PlayerImpl(BOARD_WIDTH, BOARD_HEIGHT);
+        playerInput = new PlayerInputImplForN8();
+        playerInput.registerPlayer(player);
 
         twN8 = new TetrisViewForN8(this, player);
         twN8.setScreenSize(screenWidth,screenHeight);

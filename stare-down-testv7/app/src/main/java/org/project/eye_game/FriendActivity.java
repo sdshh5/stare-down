@@ -27,6 +27,7 @@ public class FriendActivity extends AppCompatActivity {
     Button friendAddButton;
 
     String id_;
+    String nickname;
 
     ListView friendList;
     String[] roomKeyList;
@@ -71,6 +72,7 @@ public class FriendActivity extends AppCompatActivity {
         roomKeyPointer = -1;
 
         id_ = getIntent().getExtras().getString("id");
+        nickname = getIntent().getExtras().getString("nickname");
 
         friendList = (ListView) findViewById(R.id.friendListView);
         adapter = new FriendListAdapter();
@@ -106,7 +108,7 @@ public class FriendActivity extends AppCompatActivity {
                                 Log.d("INTOPRIVATE", "True");
                                 Intent intent = new Intent(getApplicationContext(), PrivatechatActivity.class);
                                 intent.putExtra("id", id_);
-                                intent.putExtra("nickname", keys.child("nickname").getValue(String.class));
+                                intent.putExtra("nickname", nickname);
                                 intent.putExtra("friendNickname", nicknameList[position]);
                                 intent.putExtra("roomKey", roomKeyList[position]);
                                 intent.putExtra("characterID", getIntent().getExtras().getInt("characterID"));
@@ -131,6 +133,7 @@ public class FriendActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), AddFriendActivity.class);
                 intent.putExtra("id", getIntent().getExtras().getString("id"));
+                intent.putExtra("nickname", nickname);
                 intent.putExtra("characterID", getIntent().getExtras().getInt("characterID"));
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
