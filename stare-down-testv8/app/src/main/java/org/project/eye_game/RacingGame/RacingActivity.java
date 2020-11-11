@@ -44,8 +44,9 @@ public class RacingActivity extends AppCompatActivity {
     private int score, level, bestScore;
     private int playCount;
 
-    Boolean isLeft = true;
-    Boolean isRight = true;
+    Boolean isLeftClosed = false;
+    Boolean isRightClosed = false;
+    Boolean isBothClosed = false;
     CameraSource cameraSource;
     String id;
 
@@ -104,7 +105,7 @@ public class RacingActivity extends AppCompatActivity {
         cameraSource = new CameraSource.Builder(this, detector)
                 .setRequestedPreviewSize(1024, 768)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setRequestedFps(20.0f)
+                .setRequestedFps(15.0f)
                 .build();
 
         try {
@@ -172,11 +173,11 @@ public class RacingActivity extends AppCompatActivity {
 
     public void updateState(String state){
         switch (state){
-            case "LEFT_EYE_CLOSE":
+            case "BOTH_EYE_CLOSE":
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        isLeft = false;
+                        isBothClosed = true;
                     }
                 });
                 break;
@@ -184,33 +185,31 @@ public class RacingActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        isRight = false;
+                        isRightClosed = true;
                     }
                 });
                 break;
-            case "LEFT_EYE_OPEN":
-                if(isLeft==false){
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Log.d("left","moving left");
-                            racingView.left();
-                            isLeft = true;
-                        }
-                    });
-                }
+            case "LEFT_EYE_CLOSE":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        isLeftClosed = true;
+                    }
+                });
                 break;
-            case "RIGHT_EYE_OPEN":
-                if(isRight==false) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Log.d("right","moving right");
+            case "BOTH_EYE_OPEN":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(isRightClosed==true&&isBothClosed==false)
                             racingView.right();
-                            isRight = true;
-                        }
-                    });
-                }
+                        else if(isLeftClosed==true&&isBothClosed==false)
+                            racingView.left();
+                        isBothClosed = false;
+                        isRightClosed = false;
+                        isLeftClosed = false;
+                    }
+                });
                 break;
         }
     }

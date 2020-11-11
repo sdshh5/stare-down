@@ -16,21 +16,21 @@ public class EyesTrackerRace extends Tracker<Face> {
 
     @Override
     public void onUpdate(Detector.Detections<Face> detections, Face face) {
-        if (face.getIsRightEyeOpenProbability() <= THRESHOLD) {
-            Log.i("EyesTrackerRace", "onUpdate: Left Eye close Detected");
-            ((RacingActivity)context).updateState("LEFT_EYE_CLOSE");
+        if (face.getIsRightEyeOpenProbability()<=THRESHOLD && face.getIsLeftEyeOpenProbability()<=THRESHOLD) {
+            Log.i("EyesTrackerRace", "onUpdate: Both Eye close Detected");
+            ((RacingActivity)context).updateState(("BOTH_EYE_CLOSE"));
         }
-        else {
-            Log.i("EyesTrackerRace", "onUpdate: Left Eye open Detected");
-            ((RacingActivity)context).updateState("LEFT_EYE_OPEN");
-        }
-        if (face.getIsLeftEyeOpenProbability() <= THRESHOLD) {
+        else if (face.getIsLeftEyeOpenProbability()<=THRESHOLD && face.getIsRightEyeOpenProbability()>THRESHOLD) {
             Log.i("EyesTrackerRace", "onUpdate: Right Eye close Detected");
-            ((RacingActivity)context).updateState("RIGHT_EYE_CLOSE");
+            ((RacingActivity)context).updateState(("RIGHT_EYE_CLOSE"));
+        }
+        else if (face.getIsLeftEyeOpenProbability()>THRESHOLD && face.getIsRightEyeOpenProbability()<=THRESHOLD) {
+            Log.i("EyesTrackerRace", "onUpdate: Left Eye close Detected");
+            ((RacingActivity)context).updateState(("LEFT_EYE_CLOSE"));
         }
         else {
-            Log.i("EyesTrackerRace", "onUpdate: Right Eye open Detected");
-            ((RacingActivity)context).updateState("RIGHT_EYE_OPEN");
+            Log.i("EyesTrackerRace", "onUpdate: Both Eye open Detected");
+            ((RacingActivity)context).updateState(("BOTH_EYE_OPEN"));
         }
     }
 
