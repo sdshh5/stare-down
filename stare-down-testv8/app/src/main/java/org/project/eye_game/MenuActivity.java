@@ -200,6 +200,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RacingActivity.class);
                 intent.putExtra("id", id);
+                intent.putExtra("characterID", CHARACTER_ID);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 finish();

@@ -104,6 +104,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
                                 newUser.setEXP2(EXP2);
                                 newUser.setEXP3(EXP3);
                                 newUser.setEXP4(EXP4);
+                                newUser.setCharacter(keys.child("character").getValue(int.class));
 
                                 keys.getRef().setValue(newUser);
 

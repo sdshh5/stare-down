@@ -16,19 +16,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.face.FaceDetector;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.project.eye_game.EyeTrackers.FaceTrackerDaemonGameOne;
 import org.project.eye_game.GameOneActivity;
 import org.project.eye_game.MenuActivity;
 import org.project.eye_game.R;
+import org.project.eye_game.UserData;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RacingActivity extends AppCompatActivity {
 
@@ -42,6 +51,7 @@ public class RacingActivity extends AppCompatActivity {
     private ImageView ivCenter;
     private RacingView racingView;
     private int score, level, bestScore;
+    private int getScore;
     private int playCount;
 
     Boolean isLeftClosed = false;
@@ -49,11 +59,16 @@ public class RacingActivity extends AppCompatActivity {
     Boolean isBothClosed = false;
     CameraSource cameraSource;
     String id;
+    int CharacterID;
+
+    private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference dbRef = db.getReference();
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
+        intent.putExtra("characterID", getIntent().getExtras().getString("characterID"));
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
@@ -254,19 +269,66 @@ public class RacingActivity extends AppCompatActivity {
     }
 
     private int loadBestScore() {
-        SharedPreferences preferences = getSharedPreferences("RacingGame", Context.MODE_PRIVATE);
-        if (preferences.contains("BestScore")) {
-            return preferences.getInt("BestScore", 0);
-        } else {
-            return 0;
-        }
+        dbRef.child("User").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                id = getIntent().getExtras().getString("id");
+                for(DataSnapshot keys : snapshot.getChildren()){
+                    String id_ = keys.child("id").getValue(String.class);
+                    if(id_.equals(id)){
+                        getScore = keys.child("exp2").getValue(int.class);
+                        break;
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        return getScore;
+//        SharedPreferences preferences = getSharedPreferences("RacingGame", Context.MODE_PRIVATE);
+//        if (preferences.contains("BestScore")) {
+//            return preferences.getInt("BestScore", 0);
+//        } else {
+//            return 0;
+//        }
     }
 
     private void saveBestScore(int bestScore) {
-        SharedPreferences preferences = getSharedPreferences("RacingGame", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("BestScore", bestScore);
-        editor.commit();
+        dbRef.child("User").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                id = getIntent().getExtras().getString("id");
+                for(DataSnapshot keys : snapshot.getChildren()){
+                    String id_ = keys.child("id").getValue(String.class);
+                    if(id_.equals(id)){
+                        Log.d("This User", id);
+                        UserData newUser = new UserData(keys.child("email").getValue(String.class),
+                                keys.child("nickname").getValue(String.class), id);
+                        newUser.setTotalEXP(keys.child("totalEXP").getValue(int.class));
+                        newUser.setTotalRank(keys.child("totalRank").getValue(int.class));
+                        newUser.setRank1(keys.child("rank1").getValue(int.class));
+                        newUser.setRank2(keys.child("rank2").getValue(int.class));
+                        newUser.setRank3(keys.child("rank3").getValue(int.class));
+                        newUser.setRank4(keys.child("rank4").getValue(int.class));
+                        newUser.setEXP1(keys.child("exp1").getValue(int.class));
+                        newUser.setCharacter(keys.child("character").getValue(int.class));
+                        newUser.setEXP2(bestScore);
+                        newUser.setEXP3(keys.child("exp3").getValue(int.class));
+                        newUser.setEXP4(keys.child("exp4").getValue(int.class));
+                        keys.getRef().setValue(newUser);
+                        break;
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+//        SharedPreferences preferences = getSharedPreferences("RacingGame", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putInt("BestScore", bestScore);
+//        editor.commit();
     }
 
     private void reset() {
