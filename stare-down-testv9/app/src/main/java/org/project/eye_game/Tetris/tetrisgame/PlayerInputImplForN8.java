@@ -16,6 +16,15 @@ public class PlayerInputImplForN8 extends PlayerInput {
         Log.d(TAG, "bottom() down()");
         bottom();
     }
+    public void rightCall(){
+        Log.d(TAG, "right()");
+        right();
+    }
+
+    public void leftCall(){
+        Log.d(TAG, "left()");
+        left();
+    }
 
     public boolean touch(int touchX, int touchY) {
         if (player == null) {

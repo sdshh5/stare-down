@@ -29,7 +29,8 @@
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="false"
-        tools:ignore="HardcodedDebugMode">
+        tools:ignore="HardcodedDebugMode"
+        >
         <activity android:name=".GameOneActivity"
             android:configChanges="screenSize|orientation"
             android:label="@string/app_name"

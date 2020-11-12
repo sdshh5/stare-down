@@ -128,7 +128,7 @@ public class PlayerUIForN8 extends PlayerUI {
         }
 
         if (player.isIdleState()) {
-            canvas.drawBitmap(mGameStart, 190, 400, null);
+            //canvas.drawBitmap(mGameStart, 190, 400, null);
 
             canvas.drawBitmap(playBtn, null,
                     new Rect(startX + BLOCK_IMAGE_SIZE * BOARD_WIDTH + 100,
@@ -164,7 +164,7 @@ public class PlayerUIForN8 extends PlayerUI {
                             startX + BLOCK_IMAGE_SIZE * BOARD_WIDTH + 100 + 200,
                             startY + 200), null);
         } else if (player.isPauseState()) {
-            canvas.drawBitmap(mGameStart, 190, 400, null);
+            //canvas.drawBitmap(mGameStart, 190, 400, null);
             canvas.drawBitmap(playBtn, null,
                     new Rect(startX + BLOCK_IMAGE_SIZE * BOARD_WIDTH + 100,
                             startY,
@@ -189,9 +189,9 @@ public class PlayerUIForN8 extends PlayerUI {
 
     private void loadImage() {
         mGameBack = BitmapFactory.decodeResource(mConext.getResources(),
-                R.drawable.main_background);
-        mGameStart = BitmapFactory.decodeResource(mConext.getResources(),
-                R.drawable.play_icon);
+                R.drawable.pink);
+        //mGameStart = BitmapFactory.decodeResource(mConext.getResources(),
+              //  R.drawable.play_icon);
         mGameOver = BitmapFactory.decodeResource(mConext.getResources(),
                 R.drawable.bomb_effect);
 

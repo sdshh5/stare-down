@@ -1,6 +1,7 @@
 package org.project.eye_game.Tetris.tetrisgame;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.project.eye_game.EyeTrackers.FaceTrackerDaemonGameTwo;
+import org.project.eye_game.MenuActivity;
 import org.project.eye_game.Tetris.player.Player;
 import org.project.eye_game.Tetris.player.PlayerImpl;
 
@@ -25,15 +27,29 @@ public class TetrisActivity extends AppCompatActivity {
     private TetrisViewForN8 twN8;
     PlayerInputImplForN8 playerInput;
     CameraSource cameraSource;
-
+    int CHARACTER_ID;
+    String id;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    Boolean isLeft = true;
+    Boolean isRight = true;
+    Boolean isBoth=true;
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        intent.putExtra("id", getIntent().getExtras().getString("id"));
+        intent.putExtra("characterID", CHARACTER_ID);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+        finish();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         int screenWidth = getWindowManager().getDefaultDisplay().getWidth();
         int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
+
 
         Log.e("Test", "W" + screenWidth + " H" + screenHeight);
 
@@ -67,7 +83,7 @@ public class TetrisActivity extends AppCompatActivity {
         cameraSource = new CameraSource.Builder(this, detector)
                 .setRequestedPreviewSize(1024, 768)
                 .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                .setRequestedFps(5.0f)
+                .setRequestedFps(15.0f)
                 .build();
 
         try {
@@ -92,8 +108,7 @@ public class TetrisActivity extends AppCompatActivity {
     }
 
     public void updateState(String state){
-        switch(state){
-            case "USER_EYES_OPEN":
+        switch (state) {
             case "FACE_NOT_FOUND":
                 runOnUiThread(new Runnable() {
                     @Override
@@ -106,13 +121,45 @@ public class TetrisActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        playerInput.downCall();
+                        isBoth=false;
+                        isLeft=true;
+                        isRight=true;
                     }
                 });
                 break;
-
+            case "LEFT_EYE_CLOSE":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        isLeft=false;
+                        isRight=true;
+                        isBoth=true;
+                    }
+                });
+                break;
+            case "RIGHT_EYE_CLOSE":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        isRight=false; isLeft=true; isBoth=true;
+                    }
+                });
+                break;
+            case "USER_EYES_OPEN":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(isBoth==false)
+                            playerInput.downCall();
+                        else if(isRight==false)
+                            playerInput.leftCall();
+                        else if(isLeft==false)
+                            playerInput.rightCall();
+                        isBoth=true; isLeft=true; isRight=true;
+                    }
+                });
+                break;
         }
-
     }
 
     @Override
@@ -121,7 +168,9 @@ public class TetrisActivity extends AppCompatActivity {
         if (twN8 != null) {
             twN8.pauseGame();
         }
-
+        if (cameraSource!=null) {
+            cameraSource.stop();
+        }
     }
 
 
@@ -132,4 +181,14 @@ public class TetrisActivity extends AppCompatActivity {
             twN8.resumeGame();
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (cameraSource!=null) {
+            cameraSource.release();
+        }
+    }
+
+
 }
