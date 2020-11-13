@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "295500028029",
+    "firebase_url": "https://eye-game-ee7bd.firebaseio.com",
+    "project_id": "eye-game-ee7bd",
+    "storage_bucket": "eye-game-ee7bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295500028029:android:7c8c9ab1cdd25862bcf914",
+        "android_client_info": {
+          "package_name": "org.project.eye_game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295500028029-cq5k1odkj8e88anrqq66br2hob8mhljh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.project.eye_game",
+            "certificate_hash": "cf8c588e7b3181aeb86ac224c6eb2b380527f058"
+          }
+        },
+        {
+          "client_id": "295500028029-8pgr2je6fpudvoqcrh72b483fvipf3gj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBLeqm4XXsC_0--80EWyZVYJ2h6y508Wg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295500028029-8pgr2je6fpudvoqcrh72b483fvipf3gj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
