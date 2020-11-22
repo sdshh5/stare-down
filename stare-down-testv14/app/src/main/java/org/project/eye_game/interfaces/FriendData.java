@@ -1,5 +1,7 @@
 package org.project.eye_game.interfaces;
 
+import android.graphics.drawable.Drawable;
+
 public class FriendData {
     String friendNickname;
     String friendID;
@@ -15,23 +17,9 @@ public class FriendData {
         return friendID;
     }
 
-    public void setFriendID(String friendID) {
-        this.friendID = friendID;
-    }
-
-    public String getFriendNickname() {
-        return friendNickname;
-    }
-
-    public void setFriendNickname(String friendNickname) {
-        this.friendNickname = friendNickname;
-    }
+    public String getFriendNickname() { return friendNickname; }
 
     public String getRoomKey() {
         return roomKey;
-    }
-
-    public void setRoomKey(String roomKey) {
-        this.roomKey = roomKey;
     }
 }

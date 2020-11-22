@@ -1,14 +1,27 @@
 package org.project.eye_game.interfaces;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.project.eye_game.R;
-import org.project.eye_game.interfaces.FriendData;
 
 import java.util.ArrayList;
 
@@ -16,9 +29,8 @@ public class FriendListAdapter extends BaseAdapter {
     ArrayList<FriendData> items = new ArrayList<FriendData>();
     Context context;
 
-    public void addItem(FriendData item){
-        items.add(item);
-    }
+    public void addItem(FriendData item){ items.add(item); }
+
     @Override
     public int getCount() {
         return items.size();

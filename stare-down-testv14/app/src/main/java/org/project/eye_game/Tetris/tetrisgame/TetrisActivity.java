@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.project.eye_game.EyeTrackers.FaceTrackerDaemonGameTwo;
-import org.project.eye_game.interfaces.MenuActivity;
 import org.project.eye_game.Tetris.player.Player;
 import org.project.eye_game.Tetris.player.PlayerImpl;
 import org.project.eye_game.interfaces.*;
@@ -42,7 +41,7 @@ public class TetrisActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", CHARACTER_ID);
         startActivity(intent);

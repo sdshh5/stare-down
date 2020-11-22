@@ -2,8 +2,10 @@ package org.project.eye_game.interfaces;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +36,6 @@ public class AddFriendActivity extends AppCompatActivity {
 
     String TargetID;
     String TargetNickname;
-
     SimpleDateFormat format1;
 
     boolean iconActivate;
@@ -47,7 +48,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
+        Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("nickname", getIntent().getExtras().getString("nickname"));
         startActivity(intent);
@@ -123,6 +124,7 @@ public class AddFriendActivity extends AppCompatActivity {
                     databaseReference.child("chatRooms").child(friend.roomKey).push().setValue(new ChatMessage(nickname, "Hi!", format1.format(new Date())));
                     databaseReference.child("friendList").child(id).push().setValue(friend);
                     databaseReference.child("friendList").child(TargetID).push().setValue(user);
+
                 }
             }
         });

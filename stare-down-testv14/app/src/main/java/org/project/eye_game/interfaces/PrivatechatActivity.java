@@ -31,6 +31,7 @@ public class PrivatechatActivity extends AppCompatActivity {
     String id;
     String nickname;
     String roomKey;
+    int CHARACTER_ID;
 
     GridView listView;
     ChatAdapter adapter;
@@ -43,9 +44,9 @@ public class PrivatechatActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), FriendActivity.class);
-        intent.putExtra("id", getIntent().getExtras().getString("id"));
-        intent.putExtra("characterID", getIntent().getExtras().getInt("characterID"));
+        Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("characterID", CHARACTER_ID);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
@@ -54,7 +55,7 @@ public class PrivatechatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_privatechat);
+        setContentView(R.layout.activity_private_chat);
 
         decorView = getWindow().getDecorView();
         uiOption = getWindow().getDecorView().getSystemUiVisibility();
@@ -69,6 +70,7 @@ public class PrivatechatActivity extends AppCompatActivity {
 
         format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
         id = getIntent().getExtras().getString("id");
+        CHARACTER_ID = getIntent().getExtras().getInt("characterID");
         nickname = getIntent().getExtras().getString("nickname");
         roomKey = getIntent().getExtras().getString("roomKey");
 

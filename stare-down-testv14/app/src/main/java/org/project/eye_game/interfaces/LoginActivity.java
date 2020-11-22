@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -100,10 +101,16 @@ public class LoginActivity extends AppCompatActivity {
                                             String userNickname = keys.child("nickname").getValue(String.class);
                                             String id = keys.child("id").getValue(String.class);
                                             int characterID = keys.child("character").getValue(int.class);
-                                            //Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                                             Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
                                             intent.putExtra("id", id);
                                             intent.putExtra("characterID", characterID);
+                                            intent.putExtra("nickname", userNickname);
+                                            SharedPreferences sharedPreferences = getSharedPreferences("login",MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putString("id",id);
+                                            editor.putInt("characterID", characterID);
+                                            editor.putString("nickname", userNickname);
+                                            editor.commit();
                                             Toast.makeText(getApplicationContext(), "Hello, " + userNickname + "!", Toast.LENGTH_LONG).show();
                                             emailEditText.setText("");
                                             pwEditText.setText("");

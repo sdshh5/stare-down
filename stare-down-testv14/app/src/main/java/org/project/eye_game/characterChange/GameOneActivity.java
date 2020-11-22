@@ -25,7 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.project.eye_game.EyeTrackers.FaceTrackerDaemonGameOne;
-import org.project.eye_game.interfaces.MenuActivity;
+import org.project.eye_game.interfaces.FragmentActivity;
+import org.project.eye_game.interfaces.FragmentGame;
 import org.project.eye_game.R;
 import org.project.eye_game.interfaces.UserData;
 
@@ -53,7 +54,7 @@ public class GameOneActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        Intent intent = new Intent(getApplicationContext(), FragmentGame.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", CHARACTER_ID);
         startActivity(intent);
@@ -224,7 +225,7 @@ public class GameOneActivity extends AppCompatActivity {
                                                 newUser.setEXP4(EXP4);
                                                 newUser.setCharacter(CHARACTER_ID);
                                                 keys.getRef().setValue(newUser);
-                                                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                                                Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
                                                 intent.putExtra("id", id);
                                                 intent.putExtra("characterID", CHARACTER_ID);
                                                 startActivity(intent);
@@ -241,14 +242,6 @@ public class GameOneActivity extends AppCompatActivity {
                                 });
                             }
                         }
-                    }
-                });
-                break;
-            case "FACE_NOT_FOUND":
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                       // Toast.makeText(getApplicationContext(), "Where is your face??", Toast.LENGTH_SHORT);
                     }
                 });
                 break;

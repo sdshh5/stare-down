@@ -11,14 +11,8 @@
         android:id="@+id/main_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
         android:background="@color/pastel_blue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:scaleType="centerCrop"/>
 
     <ImageView
         android:id="@+id/characterView"
@@ -26,10 +20,11 @@
         android:layout_height="230dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_blink"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintVertical_bias="0.431" />
 
     <TextView
         android:id="@+id/titleTextView"

@@ -2,6 +2,7 @@ package org.project.eye_game.interfaces;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     private View decorView;
     private int	uiOption;
+
+    private Intent intent;
 
     @Override
     public void onBackPressed(){
@@ -55,10 +58,25 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                finish();
+                SharedPreferences sharedPreferences = getSharedPreferences("login",MODE_PRIVATE);
+                String id = sharedPreferences.getString("id","");
+                int characterID = sharedPreferences.getInt("characterID", -1);
+                String userNickname = sharedPreferences.getString("nickname","");
+                if(id.length()==0) {
+                    intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                    finish();
+                }
+                else {
+                    intent = new Intent(MainActivity.this, FragmentActivity.class);
+                    intent.putExtra("id", id);
+                    intent.putExtra("characterID", characterID);
+                    intent.putExtra("nickname",userNickname);
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                    finish();
+                }
             }
         },2000);
     }

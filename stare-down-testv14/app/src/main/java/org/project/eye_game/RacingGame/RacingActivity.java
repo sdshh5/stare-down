@@ -65,7 +65,7 @@ public class RacingActivity extends AppCompatActivity {
         if (cameraSource!=null) {
             cameraSource.stop();
         }
-        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+        Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", getIntent().getExtras().getString("characterID"));
         startActivity(intent);

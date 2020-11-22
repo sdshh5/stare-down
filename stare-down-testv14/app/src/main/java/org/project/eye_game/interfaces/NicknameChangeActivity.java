@@ -45,7 +45,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), CharacterActivity.class);
+        Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", getIntent().getExtras().getInt("characterID"));
         startActivity(intent);
@@ -71,7 +71,6 @@ public class NicknameChangeActivity extends AppCompatActivity {
         id = getIntent().getExtras().getString("id");
 
         newNicknameTextView = findViewById(R.id.newNicknameEditText);
-
         changeButton = findViewById(R.id.changeButton);
         changeButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -109,7 +108,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
 
                                 keys.getRef().setValue(newUser);
 
-                                Intent intent = new Intent(getApplicationContext(), CharacterActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
                                 intent.putExtra("id", id);
                                 intent.putExtra("characterID", getIntent().getExtras().getInt("characterID"));
                                 startActivity(intent);
@@ -124,6 +123,5 @@ public class NicknameChangeActivity extends AppCompatActivity {
            }
 
         });
-
     }
 }
