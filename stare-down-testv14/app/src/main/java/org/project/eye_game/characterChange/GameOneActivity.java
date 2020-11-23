@@ -54,9 +54,10 @@ public class GameOneActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(getApplicationContext(), FragmentGame.class);
+        Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", CHARACTER_ID);
+        intent.putExtra("fragmentId",R.id.game_menu);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
@@ -228,6 +229,7 @@ public class GameOneActivity extends AppCompatActivity {
                                                 Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
                                                 intent.putExtra("id", id);
                                                 intent.putExtra("characterID", CHARACTER_ID);
+                                                intent.putExtra("fragmentId",R.id.profile_menu);
                                                 startActivity(intent);
                                                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                                                 finish();

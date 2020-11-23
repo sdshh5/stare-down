@@ -68,6 +68,7 @@ public class RacingActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", getIntent().getExtras().getString("characterID"));
+        intent.putExtra("fragmentId",R.id.game_menu);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();

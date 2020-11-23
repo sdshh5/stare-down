@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.project.eye_game.EyeTrackers.FaceTrackerDaemonGameTwo;
+import org.project.eye_game.R;
 import org.project.eye_game.Tetris.player.Player;
 import org.project.eye_game.Tetris.player.PlayerImpl;
 import org.project.eye_game.interfaces.*;
@@ -44,6 +45,7 @@ public class TetrisActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", CHARACTER_ID);
+        intent.putExtra("fragmentId", R.id.game_menu);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();

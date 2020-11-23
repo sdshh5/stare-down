@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,21 +26,11 @@ public class FragmentActivity extends AppCompatActivity {
     int CHARACTER_ID;
     String id;
     String nickname;
+    int fragmentId;
 
     @Override
-    public void onBackPressed() {   // back button을 눌렀을 때 bottomnavigation의 item도 같이 pop
-        int count = getSupportFragmentManager().getBackStackEntryCount();
-        if (count==0)
-            super.onBackPressed();
-        else if (count>=5)
-            super.finish();
-        else {
-            int index = ((getSupportFragmentManager().getBackStackEntryCount())-1);
-            getSupportFragmentManager().popBackStack();
-            FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(index);
-            int stackId = backStackEntry.getId();
-            bottomNavigationView.getMenu().getItem(stackId).setChecked(true);
-        }
+    public void onBackPressed() {
+        finish();
     }
 
     @Override
@@ -47,20 +38,33 @@ public class FragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout, fragmentProfile).commitAllowingStateLoss();
-
-        bottomNavigationView = findViewById(R.id.navigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
-
         id = getIntent().getExtras().getString("id");
         CHARACTER_ID = getIntent().getExtras().getInt("characterID");
         nickname = getIntent().getExtras().getString("nickname");
 
-        Bundle bundle = new Bundle();
-        bundle.putString("id", id);
-        bundle.putInt("characterID",CHARACTER_ID);
-        fragmentProfile.setArguments(bundle);
+        bottomNavigationView = findViewById(R.id.navigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        if(getIntent().getExtras().getInt("fragmentId")==0) {
+            fragmentId = R.id.profile_menu;
+            bottomNavigationView.setSelectedItemId(fragmentId);
+            transaction.replace(R.id.frameLayout, fragmentProfile).commitAllowingStateLoss();
+            Bundle bundle = new Bundle();
+            bundle.putString("id", id);
+            bundle.putInt("characterID",CHARACTER_ID);
+            fragmentProfile.setArguments(bundle);
+        }
+        else {
+            fragmentId = getIntent().getExtras().getInt("fragmentId");
+            bottomNavigationView.setSelectedItemId(fragmentId);
+            transaction.replace(R.id.frameLayout, fragmentGame).commitAllowingStateLoss();
+            Bundle bundle = new Bundle();
+            bundle.putString("id", id);
+            bundle.putInt("characterID",CHARACTER_ID);
+            fragmentGame.setArguments(bundle);
+        }
     }
 
     public void updateState(String frag,String state) {
@@ -70,7 +74,6 @@ public class FragmentActivity extends AppCompatActivity {
                 fragmentProfile.updateState(state);
                 break;
         }
-
     }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {

@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         if (System.currentTimeMillis() <= backKeyPressedTime + 2500) {
-            finish();
+            finishAffinity();
             toast.cancel();
             toast = Toast.makeText(this,"Bye bye~",Toast.LENGTH_LONG);
             toast.show();

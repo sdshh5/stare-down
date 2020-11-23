@@ -51,7 +51,9 @@
             <ImageView
                 android:id="@+id/iv_add_friend"
                 android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_height="30dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:paddingRight="24dp"
@@ -60,7 +62,9 @@
             <ImageView
                 android:id="@+id/iv_edit_nickname"
                 android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_height="30dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:paddingRight="24dp"
@@ -69,7 +73,9 @@
             <ImageView
                 android:id="@+id/iv_logout"
                 android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_height="30dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:paddingRight="16dp"
