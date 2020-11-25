@@ -19,7 +19,7 @@ public class PlayerUIForN8 extends PlayerUI {
     private Context mConext;
     private final int BLOCK_IMAGE_SIZE = 60;
     private final int N8_width = 1080;
-    private final int N8_height = 1920;
+    private final int N8_height = 2000;
     public static final int BOARD_WIDTH = 10;
     public static final int BOARD_HEIGHT = 20;
 
@@ -60,7 +60,7 @@ public class PlayerUIForN8 extends PlayerUI {
         int width = player.getWidth();
         int height = player.getHeight();
 
-        canvas.drawBitmap(mGameBack, null, new Rect(0, 0, N8_width, N8_height), null);
+        canvas.drawBitmap(mGameBack, null, new Rect(0, 0, screenWidth, screenHeight), null);
 
         Paint paint = new Paint();
         paint.setAlpha(128);
@@ -189,11 +189,11 @@ public class PlayerUIForN8 extends PlayerUI {
 
     private void loadImage() {
         mGameBack = BitmapFactory.decodeResource(mConext.getResources(),
-                R.drawable.pink);
+                R.drawable.backimage);
         //mGameStart = BitmapFactory.decodeResource(mConext.getResources(),
               //  R.drawable.play_icon);
         mGameOver = BitmapFactory.decodeResource(mConext.getResources(),
-                R.drawable.bomb_effect);
+                R.drawable.gameover);
 
         mTile[0] =  BitmapFactory.decodeResource(mConext.getResources(),
                 R.drawable.black);
