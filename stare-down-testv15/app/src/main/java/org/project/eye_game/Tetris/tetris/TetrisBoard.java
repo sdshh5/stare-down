@@ -3,7 +3,7 @@ package org.project.eye_game.Tetris.tetris;
 public class TetrisBoard {
     private int width;
     private int height;
-    private int[][] board;
+    protected int[][] board;
 
     /**
      * Default constructor

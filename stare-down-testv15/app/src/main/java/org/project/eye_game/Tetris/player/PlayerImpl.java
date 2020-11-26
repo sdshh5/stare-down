@@ -5,14 +5,17 @@ import org.project.eye_game.Tetris.tetris.ITetrisObserver;
 import org.project.eye_game.Tetris.tetris.Score;
 import org.project.eye_game.Tetris.tetris.Tetris;
 import org.project.eye_game.Tetris.tetris.Tetrominos;
+import org.project.eye_game.Tetris.tetrisgame.BoardProfile;
 
 public class PlayerImpl implements Player, ITetrisObserver {
     private ITetris tetris;
     private PlayerObserver gameViewObserver = null;
     private String id;
+    private BoardProfile profile;
 
-    public PlayerImpl(String id, int width, int height) {
-        tetris = new Tetris(width, height);
+    public PlayerImpl(String id, BoardProfile profile) {
+        this.profile = profile;
+        tetris = new Tetris(BoardProfile.boardWidth, BoardProfile.boardHeight);
         tetris.register(this);
     }
 

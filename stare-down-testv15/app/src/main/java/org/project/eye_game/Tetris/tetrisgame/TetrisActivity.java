@@ -40,6 +40,8 @@ public class TetrisActivity extends AppCompatActivity {
     Boolean isRight = true;
     Boolean isBoth=true;
 
+    BoardProfile profile;
+
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
@@ -56,6 +58,7 @@ public class TetrisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         int screenWidth = getWindowManager().getDefaultDisplay().getWidth();
         int screenHeight = getWindowManager().getDefaultDisplay().getHeight();
+        profile = new BoardProfile(screenWidth, screenHeight);
 
 
         Log.e("Test", "W" + screenWidth + " H" + screenHeight);
@@ -63,11 +66,11 @@ public class TetrisActivity extends AppCompatActivity {
         int BOARD_WIDTH = 10;
         int BOARD_HEIGHT = 20;
 
-        Player player = new PlayerImpl(getIntent().getExtras().getString("id"), BOARD_WIDTH, BOARD_HEIGHT);
-        playerInput = new PlayerInputImplForN8();
+        Player player = new PlayerImpl(getIntent().getExtras().getString("id"), profile);
+        playerInput = new PlayerInputImplForN8(profile);
         playerInput.registerPlayer(player);
 
-        twN8 = new TetrisViewForN8(this, player);
+        twN8 = new TetrisViewForN8(this, player, profile);
         twN8.setScreenSize(screenWidth,screenHeight);
         id = getIntent().getExtras().getString("id");
         dbRef.child("User").addValueEventListener(new ValueEventListener() {
