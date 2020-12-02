@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".interfaces.PrivatechatActivity">
+
+    <ImageView
+        android:id="@+id/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/pastel_pink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <GridView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="20dp"
+        android:background="#77ffffff"
+        android:numColumns="1"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:transcriptMode="alwaysScroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/messageEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/edittext_style"
+        android:backgroundTint="#B3FFFFFF"
+        android:clickable="true"
+        android:ems="15"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="start|top"
+        android:hint="write here..."
+        android:inputType="textMultiLine"
+        android:lines="2"
+        android:maxLines="5"
+        android:padding="2dp"
+        android:textColor="#55000000"
+        android:textColorHighlight="#55FFFFFF"
+        android:textColorHint="#ff000000"
+        android:textColorLink="#55554499"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#55ffffff"
+        android:text="SEND"
+        app:layout_constraintBottom_toBottomOf="@+id/messageEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/messageEditText"
+        app:layout_constraintTop_toTopOf="@+id/messageEditText" />
+
+    <Button
+        android:id="@+id/callButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#55ffffff"
+        android:text="CALL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messageEditText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
