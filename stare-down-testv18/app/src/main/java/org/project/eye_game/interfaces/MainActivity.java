@@ -62,7 +62,11 @@ public class MainActivity extends AppCompatActivity {
                 String id = sharedPreferences.getString("id","");
                 int characterID = sharedPreferences.getInt("characterID", -1);
                 String userNickname = sharedPreferences.getString("nickname","");
+<<<<<<< HEAD
                 if(id.length()==0 || id==null || userNickname==null) {
+=======
+                if(id.length()==0||id==null||userNickname==null) {
+>>>>>>> 61d0848bf9ae3e0726aa0a6f3ff4b042c884cff0
                     intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
