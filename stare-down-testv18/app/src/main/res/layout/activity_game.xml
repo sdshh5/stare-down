@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="54dp"
     tools:context=".interfaces.FragmentGame">
 
     <ImageView
@@ -27,6 +28,7 @@
         android:backgroundTint="#88225544"
         android:src="@drawable/game_card1"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/MenuTitleTextView"/>
 
     <ImageView
@@ -36,6 +38,7 @@
         android:layout_margin="40dp"
         android:src="@drawable/game_card2"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameCard1" />
 
     <ImageView
@@ -45,6 +48,7 @@
         android:layout_margin="40dp"
         android:src="@drawable/tetris"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameCard2"
         />
 

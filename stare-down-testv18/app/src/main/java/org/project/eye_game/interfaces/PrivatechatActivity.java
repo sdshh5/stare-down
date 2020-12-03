@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
+import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +33,7 @@ public class PrivatechatActivity extends AppCompatActivity {
     String roomKey;
     int CHARACTER_ID;
 
-    GridView listView;
+    ListView listView;
     ChatAdapter adapter;
     SimpleDateFormat format1;
 
@@ -90,8 +90,7 @@ public class PrivatechatActivity extends AppCompatActivity {
         });
 
         listView =  findViewById(R.id.listView);
-        adapter = new ChatAdapter();
-
+        adapter = new ChatAdapter(nickname);
         Log.d("ROOM_KEY", roomKey);
 
         databaseReference.child("chatRooms").child(roomKey).addListenerForSingleValueEvent(new ValueEventListener() {

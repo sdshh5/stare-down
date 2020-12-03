@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".interfaces.FragmentProfile"
+    android:layout_marginBottom="54dp"
     android:orientation="vertical">
 
     <ImageView
@@ -141,8 +142,6 @@
                     android:id="@+id/friendListView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginBottom="20dp"
                     android:background="@color/pastel_white"
                     android:orientation="vertical" />
             </LinearLayout>

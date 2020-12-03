@@ -1,7 +1,6 @@
 package org.project.eye_game.interfaces;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,9 @@ import java.util.ArrayList;
 public class ChatAdapter extends BaseAdapter {
     ArrayList<ChatMessage> items = new ArrayList<ChatMessage>();
     Context context;
-
+    String nickname;
+    LayoutInflater inflater;
+    public ChatAdapter(String nickname) { this.nickname = nickname; }
     public void addItem(ChatMessage item){
         items.add(item);
     }
@@ -40,25 +41,23 @@ public class ChatAdapter extends BaseAdapter {
         ChatMessage listItem = items.get(position);
 
         if(convertView == null){
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.message_item, parent, false);
+            inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
-        TextView message = convertView.findViewById(R.id.messageTextView_);
-        TextView time = convertView.findViewById(R.id.timeTextView_);
-
-        message.setText(listItem.getNickname());
-        message.append(" : " + listItem.getMessage());
-        time.setText(listItem.getTime());
-
-        if(listItem.getGravity()==0){
-            message.setGravity(Gravity.LEFT);
-            time.setGravity(Gravity.LEFT);
+        if(listItem.getNickname().equals(nickname)) {
+            convertView = inflater.inflate(R.layout.my_msgbox, parent, false);
         }
-        else{
-            message.setGravity(Gravity.RIGHT);
-            time.setGravity(Gravity.RIGHT);
+        else {
+            convertView = inflater.inflate(R.layout.other_msgbox, parent, false);
         }
+
+        TextView tvName= convertView.findViewById(R.id.tv_name);
+        TextView tvMsg= convertView.findViewById(R.id.tv_msg);
+        TextView tvTime= convertView.findViewById(R.id.tv_time);
+
+        tvName.setText(listItem.getNickname());
+        tvMsg.setText(listItem.getMessage());
+        tvTime.setText(listItem.getTime());
 
         return convertView;
     }

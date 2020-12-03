@@ -263,11 +263,12 @@ public class RacingActivity extends AppCompatActivity {
                     tvScore.setText(String.valueOf(score));
                     break;
                 case RacingView.MSG_COLLISION:
-                    boolean achieveBest = false;
+                    boolean achieveBest = true;
                     if(bestScore < score) {
                         tvBest.setText(String.valueOf(score));
                         bestScore = score;
                     }
+                    else achieveBest = false;
 
                     id = getIntent().getExtras().getString("id");
                     thisRef.child("exp2").setValue(bestScore);
@@ -338,7 +339,6 @@ public class RacingActivity extends AppCompatActivity {
                         }
                     });
 
-                    achieveBest = true;
                     collision(achieveBest);
                     break;
                 case RacingView.MSG_COMPLETE:

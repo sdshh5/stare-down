@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,7 +33,7 @@ public class FragmentChat extends Fragment {
     EditText messageView;
     Button sendButton;
     String nickname;
-    GridView listView;
+    ListView listView;
     ChatAdapter adapter;
     SimpleDateFormat format1;
 
@@ -67,7 +67,7 @@ public class FragmentChat extends Fragment {
         });
 
         listView =  chatView.findViewById(R.id.listView);
-        adapter = new ChatAdapter();
+        adapter = new ChatAdapter(nickname);
 
         databaseReference.child("GlobalChat").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
