@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".interfaces.RegistActivity">
+
+    <ImageView
+        android:id="@+id/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/pastel_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iconView"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_blink"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/registTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iconView" />
+
+    <EditText
+        android:id="@+id/nicknameEditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Your Nickname"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#B3FFFFFF"
+        android:textColorLink="#B3FFFFFF"
+        android:backgroundTint="#B3FFFFFF"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/registTitleView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/newEmailEditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#B3FFFFFF"
+        android:textColorLink="#B3FFFFFF"
+        android:backgroundTint="#B3FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nicknameEditText" />
+
+    <EditText
+        android:id="@+id/newPasswordEditText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="New Password"
+        android:inputType="numberPassword"
+        android:textColor="#ffffffff"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#B3FFFFFF"
+        android:textColorLink="#B3FFFFFF"
+        android:backgroundTint="#B3FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newEmailEditText" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:theme="@style/AppTheme.GreenRipple"
+        android:foreground="?selectableItemBackground"
+        android:background="@drawable/button_style"
+        android:textColor="@color/pastel_blue"
+        android:textStyle="bold"
+        android:text="Complete"
+        android:textSize="20dp"
+        android:backgroundTint="@color/pastel_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newPasswordEditText" />
+</androidx.constraintlayout.widget.ConstraintLayout>
