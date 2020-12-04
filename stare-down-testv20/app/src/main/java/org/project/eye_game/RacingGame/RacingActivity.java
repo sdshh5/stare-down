@@ -46,7 +46,6 @@ public class RacingActivity extends AppCompatActivity {
     private ImageView ivCenter;
     private RacingView racingView;
     private int score, level, bestScore;
-    private int getScore;
     private int playCount;
 
     boolean isSave = false;
@@ -56,7 +55,6 @@ public class RacingActivity extends AppCompatActivity {
     CameraSource cameraSource;
     String id;
     String nickname;
-    int rk;
 
 
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -73,6 +71,7 @@ public class RacingActivity extends AppCompatActivity {
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", getIntent().getExtras().getString("characterID"));
         intent.putExtra("fragmentId",R.id.game_menu);
+        intent.putExtra("nickname",nickname);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
@@ -84,6 +83,7 @@ public class RacingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_race);
 
         id = getIntent().getExtras().getString("id");
+        nickname = getIntent().getExtras().getString("id");
 
         contLabel = findViewById(R.id.contNotify);
         tvNotify = (TextView) findViewById(R.id.notify);

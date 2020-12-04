@@ -1,14 +1,9 @@
 package org.project.eye_game.interfaces;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.WindowManager;
-import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -54,6 +49,7 @@ public class FragmentActivity extends AppCompatActivity {
             transaction.replace(R.id.frameLayout, fragmentProfile).commitAllowingStateLoss();
             Bundle bundle = new Bundle();
             bundle.putString("id", id);
+            bundle.putString("nickname",nickname);
             bundle.putInt("characterID",CHARACTER_ID);
             fragmentProfile.setArguments(bundle);
         }
@@ -63,6 +59,7 @@ public class FragmentActivity extends AppCompatActivity {
             transaction.replace(R.id.frameLayout, fragmentGame).commitAllowingStateLoss();
             Bundle bundle = new Bundle();
             bundle.putString("id", id);
+            bundle.putString("nickname",nickname);
             bundle.putInt("characterID",CHARACTER_ID);
             fragmentGame.setArguments(bundle);
         }
@@ -87,6 +84,7 @@ public class FragmentActivity extends AppCompatActivity {
                     transaction.replace(R.id.frameLayout, fragmentProfile).addToBackStack(null).commitAllowingStateLoss();
                     Bundle bundle_profile = new Bundle();
                     bundle_profile.putString("id", id);
+                    bundle_profile.putString("nickname",nickname);
                     bundle_profile.putInt("characterID",CHARACTER_ID);
                     fragmentProfile.setArguments(bundle_profile);
                     break;
@@ -100,6 +98,7 @@ public class FragmentActivity extends AppCompatActivity {
                     transaction.replace(R.id.frameLayout, fragmentGame).addToBackStack(null).commitAllowingStateLoss();
                     Bundle bundle_game = new Bundle();
                     bundle_game.putString("id", id);
+                    bundle_game.putString("nickname",nickname);
                     bundle_game.putInt("characterID",CHARACTER_ID);
                     fragmentGame.setArguments(bundle_game);
                     break;
@@ -107,6 +106,7 @@ public class FragmentActivity extends AppCompatActivity {
                     transaction.replace(R.id.frameLayout, fragmentRank).addToBackStack(null).commitAllowingStateLoss();
                     Bundle bundle_rank = new Bundle();
                     bundle_rank.putString("id", id);
+                    bundle_rank.putString("nickname",nickname);
                     fragmentRank.setArguments(bundle_rank);
                     break;
             }

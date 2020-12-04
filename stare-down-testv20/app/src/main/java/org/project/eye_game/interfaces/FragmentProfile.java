@@ -77,10 +77,12 @@ public class FragmentProfile extends Fragment {
         if(bundle!=null) {
             id_ = bundle.getString("id");
             CHARACTER_ID = bundle.getInt("characterID");
+            nickname = bundle.getString("nickname");
         }
         else {
             id_ = activity.getIntent().getExtras().getString("id");
             CHARACTER_ID = activity.getIntent().getExtras().getInt("characterID");
+            nickname = activity.getIntent().getExtras().getString("nickname");
         }
 
         characterView = profileView.findViewById(R.id.characterView);
@@ -193,6 +195,7 @@ public class FragmentProfile extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(context, NicknameChangeActivity.class);
                 intent.putExtra("id", id_);
+                intent.putExtra("nickname",nickname);
                 if (cameraSource!=null) {
                     cameraSource.stop();
                 }

@@ -46,6 +46,7 @@ public class PrivatechatActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", id);
         intent.putExtra("characterID", CHARACTER_ID);
+        intent.putExtra("nickname",nickname);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();
@@ -92,12 +93,12 @@ public class PrivatechatActivity extends AppCompatActivity {
                     String message = keys.child("message").getValue(String.class);
                     String time = keys.child("time").getValue(String.class);
                     ChatMessage chat = new ChatMessage(nickname_, message, time);
-                    if(nickname_.equals(nickname)){
+                    /*if(nickname_.equals(nickname)){
                         chat.setGravity(1);
                     }
                     else{
                         chat.setGravity(0);
-                    }
+                    }*/
                     adapter.addItem(chat);
                 }
                 listView.setAdapter(adapter);

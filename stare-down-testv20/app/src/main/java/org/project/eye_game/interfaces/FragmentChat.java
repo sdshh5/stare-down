@@ -80,12 +80,12 @@ public class FragmentChat extends Fragment {
                     String message = keys.child("message").getValue(String.class);
                     String time = keys.child("time").getValue(String.class);
                     ChatMessage chat = new ChatMessage(nickname_, message, time);
-                    if(nickname_.equals(nickname)){
+                    /*if(nickname_.equals(nickname)){
                         chat.setGravity(1);
                     }
                     else{
                         chat.setGravity(0);
-                    }
+                    }*/
                     adapter.addItem(chat);
                 }
                 listView.setAdapter(adapter);

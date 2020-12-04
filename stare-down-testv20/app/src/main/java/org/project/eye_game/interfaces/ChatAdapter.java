@@ -1,6 +1,7 @@
 package org.project.eye_game.interfaces;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,6 @@ public class ChatAdapter extends BaseAdapter {
         if(convertView == null){
             inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
-
         if(listItem.getNickname().equals(nickname)) {
             convertView = inflater.inflate(R.layout.my_msgbox, parent, false);
         }

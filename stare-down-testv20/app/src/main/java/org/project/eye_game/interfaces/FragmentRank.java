@@ -33,7 +33,6 @@ public class FragmentRank extends Fragment {
 
     String id;
     String nickname;
-    String nick;
     int i=0, j=0, x=0;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -56,8 +55,10 @@ public class FragmentRank extends Fragment {
         TetrisRankingView = (ListView) rankView.findViewById(R.id.TetrisRankView);
 
         Bundle bundle = getArguments();
-        if(bundle!=null)
+        if(bundle!=null) {
             id = bundle.getString("id");
+            nickname = bundle.getString("nickname");
+        }
 
         adapterRace = new GameDataAdapter();
         adapterTetris = new GameDataAdapter();

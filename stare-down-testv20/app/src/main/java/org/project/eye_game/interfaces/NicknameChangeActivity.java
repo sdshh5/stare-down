@@ -33,20 +33,15 @@ public class NicknameChangeActivity extends AppCompatActivity {
 
     int TotalRank;
     int TotalEXP;
-    int Rank1;
-    int Rank2;
-    int Rank3;
-    int Rank4;
-    int EXP1;
     int EXP2;
     int EXP3;
-    int EXP4;
     String id;
 
     @Override
     public void onBackPressed(){
         Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
+        intent.putExtra("nickname", getIntent().getExtras().getString("nickname"));
         intent.putExtra("characterID", getIntent().getExtras().getInt("characterID"));
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
@@ -69,6 +64,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility( uiOption );
 
         id = getIntent().getExtras().getString("id");
+        nickname = getIntent().getExtras().getString("nickname");
 
         newNicknameTextView = findViewById(R.id.newNicknameEditText);
         changeButton = findViewById(R.id.changeButton);
@@ -81,8 +77,6 @@ public class NicknameChangeActivity extends AppCompatActivity {
                         for(DataSnapshot keys : snapshot.getChildren()) {
                             String _id = keys.child("id").getValue(String.class);
                             if (id.equals(_id)) {
-                                TotalEXP = keys.child("totalEXP").getValue(int.class);
-                                TotalRank = keys.child("totalRank").getValue(int.class);
 
                                 EXP2 = keys.child("exp2").getValue(int.class);
                                 EXP3 = keys.child("exp3").getValue(int.class);
@@ -100,6 +94,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
                                 intent.putExtra("id", id);
+                                intent.putExtra("nickname", nickname);
                                 intent.putExtra("characterID", getIntent().getExtras().getInt("characterID"));
                                 startActivity(intent);
                                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);

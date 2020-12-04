@@ -51,6 +51,7 @@ public class TetrisActivity extends AppCompatActivity {
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", CHARACTER_ID);
         intent.putExtra("fragmentId", R.id.game_menu);
+        intent.putExtra("nickname", nickname);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         finish();

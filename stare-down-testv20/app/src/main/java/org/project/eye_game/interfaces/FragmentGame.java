@@ -24,6 +24,7 @@ public class FragmentGame extends Fragment {
     ImageView card2;
     ImageView card3;
 
+    String nickname;
     int CHARACTER_ID;
     String id;
 
@@ -35,11 +36,13 @@ public class FragmentGame extends Fragment {
         ViewGroup gameView = (ViewGroup) inflater.inflate(R.layout.activity_game, container, false);
 
         id = activity.getIntent().getExtras().getString("id");
+        nickname = activity.getIntent().getExtras().getString("nickname");
         CHARACTER_ID = activity.getIntent().getExtras().getInt("characterID");
 
         Bundle bundle = getArguments();
         if(bundle!=null) {
             id = bundle.getString("id");
+            nickname = bundle.getString("nickname");
             CHARACTER_ID = bundle.getInt("characterID");
         }
 
@@ -50,6 +53,7 @@ public class FragmentGame extends Fragment {
                 Intent intent = new Intent(context, GameOneActivity.class);
                 intent.putExtra("id", id);
                 intent.putExtra("characterID", CHARACTER_ID);
+                intent.putExtra("nickname", nickname);
                 startActivity(intent);
                 activity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 activity.finish();
@@ -63,6 +67,7 @@ public class FragmentGame extends Fragment {
                 Intent intent = new Intent(context, RacingActivity.class);
                 intent.putExtra("id", id);
                 intent.putExtra("characterID", CHARACTER_ID);
+                intent.putExtra("nickname", nickname);
                 startActivity(intent);
                 activity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 activity.finish();
@@ -76,6 +81,7 @@ public class FragmentGame extends Fragment {
                 Intent intent = new Intent(context, TetrisActivity.class);
                 intent.putExtra("id", id);
                 intent.putExtra("characterID", CHARACTER_ID);
+                intent.putExtra("nickname", nickname);
                 startActivity(intent);
                 activity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                 activity.finish();
