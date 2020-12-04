@@ -17,6 +17,12 @@
         <!-- Customize your theme here. -->
         <item name="colorControlHighlight">@color/pastel_green</item>
     </style>
-    <!-- No Title Bar-->
+    <style name="AppTheme2" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowActionBar">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:fontFamily">@font/grandstander_font</item>
+    </style>
 
 </resources>
