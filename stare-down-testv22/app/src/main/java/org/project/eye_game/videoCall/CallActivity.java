@@ -198,14 +198,14 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
 
   @Override
   public void onBackPressed(){
-    Intent intent = new Intent(getApplicationContext(), PrivatechatActivity.class);
-    receivedIntent = getIntent();
-    intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-    intent.putExtra("id", receivedIntent.getExtras().getString("id"));
-    intent.putExtra("characterID", receivedIntent.getExtras().getInt("characterID"));
-    intent.putExtra("friendNickname", receivedIntent.getExtras().getString("friendNickname"));
-    intent.putExtra("roomKey", receivedIntent.getExtras().getString("roomKey"));
-    startActivity(intent);
+//    Intent intent = new Intent(getApplicationContext(), PrivatechatActivity.class);
+//    receivedIntent = getIntent();
+//    intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
+//    intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+//    intent.putExtra("characterID", receivedIntent.getExtras().getInt("characterID"));
+//    intent.putExtra("friendNickname", receivedIntent.getExtras().getString("friendNickname"));
+//    intent.putExtra("roomKey", receivedIntent.getExtras().getString("roomKey"));
+//    startActivity(intent);
     overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     finish();
   }
@@ -683,14 +683,14 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     } else {
       setResult(RESULT_CANCELED);
     }
-    Intent intent = new Intent(getApplicationContext(), PrivatechatActivity.class);
-    receivedIntent = getIntent();
-    intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
-    intent.putExtra("id", receivedIntent.getExtras().getString("id"));
-    intent.putExtra("characterID", receivedIntent.getExtras().getInt("characterID"));
-    intent.putExtra("friendNickname", receivedIntent.getExtras().getString("friendNickname"));
-    intent.putExtra("roomKey", receivedIntent.getExtras().getString("roomKey"));
-    startActivity(intent);
+//    Intent intent = new Intent(getApplicationContext(), PrivatechatActivity.class);
+//    receivedIntent = getIntent();
+//    intent.putExtra("nickname",receivedIntent.getExtras().getString("nickname"));
+//    intent.putExtra("id", receivedIntent.getExtras().getString("id"));
+//    intent.putExtra("characterID", receivedIntent.getExtras().getInt("characterID"));
+//    intent.putExtra("friendNickname", receivedIntent.getExtras().getString("friendNickname"));
+//    intent.putExtra("roomKey", receivedIntent.getExtras().getString("roomKey"));
+//    startActivity(intent);
     overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
     finish();
   }

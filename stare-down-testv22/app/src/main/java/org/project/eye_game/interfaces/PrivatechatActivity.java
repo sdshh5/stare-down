@@ -160,7 +160,7 @@ public class PrivatechatActivity extends AppCompatActivity {
                 intent.putExtra("characterID", getIntent().getExtras().getInt("characterID"));
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                finish();
+//                finish();
             }
         });
     }

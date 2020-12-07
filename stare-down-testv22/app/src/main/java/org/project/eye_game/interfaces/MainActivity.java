@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String id_;
+                        String userNickname;
+                        int character = -1;
+
                         for(DataSnapshot keys: snapshot.getChildren()){
                             id_ = keys.child("id").getValue(String.class);
                             if(id_.equals(id)){
@@ -88,11 +91,10 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             }
                         }
+                        userNickname = nickname;
+                        character = characterID;
 
-                        String userNickname = nickname;
-
-                        if(id.length()==0||id==null||userNickname==null) {
-
+                        if(id.length()<=0||id==null||userNickname==null||character==-1) {
                             intent = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(intent);
                             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                         else {
                             intent = new Intent(MainActivity.this, FragmentActivity.class);
                             intent.putExtra("id", id);
-                            intent.putExtra("characterID", characterID);
+                            intent.putExtra("characterID", character);
                             intent.putExtra("nickname", userNickname);
                             startActivity(intent);
                             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
