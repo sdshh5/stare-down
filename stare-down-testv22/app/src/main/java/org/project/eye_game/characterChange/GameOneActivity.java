@@ -47,6 +47,7 @@ public class GameOneActivity extends AppCompatActivity {
     int CHARACTER_ID;
     int newCharacterID;
     String id;
+    String nickname;
     Animation shake;
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -57,6 +58,7 @@ public class GameOneActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
         intent.putExtra("id", getIntent().getExtras().getString("id"));
         intent.putExtra("characterID", CHARACTER_ID);
+        intent.putExtra("nickname", getIntent().getExtras().getString("nickname"));
         intent.putExtra("fragmentId",R.id.game_menu);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
@@ -83,6 +85,7 @@ public class GameOneActivity extends AppCompatActivity {
 
         CHARACTER_ID = getIntent().getExtras().getInt("characterID");
         id = getIntent().getExtras().getString("id");
+        nickname = getIntent().getExtras().getString("nickname");
 
         hammerView = findViewById(R.id.hammerView);
 
@@ -219,6 +222,7 @@ public class GameOneActivity extends AppCompatActivity {
                                                 Intent intent = new Intent(getApplicationContext(), FragmentActivity.class);
                                                 intent.putExtra("id", id);
                                                 intent.putExtra("characterID", CHARACTER_ID);
+                                                intent.putExtra("nickname", nickname);
                                                 intent.putExtra("fragmentId",R.id.profile_menu);
                                                 startActivity(intent);
                                                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);

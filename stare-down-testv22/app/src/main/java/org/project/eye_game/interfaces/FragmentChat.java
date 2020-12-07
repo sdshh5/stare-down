@@ -33,6 +33,7 @@ public class FragmentChat extends Fragment {
     EditText messageView;
     Button sendButton;
     String nickname;
+    String id;
     ListView listView;
     ChatAdapter adapter;
     SimpleDateFormat format1;
@@ -48,6 +49,7 @@ public class FragmentChat extends Fragment {
         Bundle bundle = getArguments();
         if(bundle!=null) {
             nickname = bundle.getString("nickname");
+            id = bundle.getString("id");
         }
         format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 
@@ -60,7 +62,7 @@ public class FragmentChat extends Fragment {
                 if(message.equals("")){
                     return;
                 }
-                ChatMessage chat = new ChatMessage(nickname, message, format1.format(new Date()));
+                ChatMessage chat = new ChatMessage(id, nickname, message, format1.format(new Date()));
                 databaseReference.child("GlobalChat").push().setValue(chat);
                 messageView.setText("");
             }
@@ -76,10 +78,11 @@ public class FragmentChat extends Fragment {
                     return;
                 }
                 for(DataSnapshot keys : snapshot.getChildren()){
+                    String id_ = keys.child("id").getValue(String.class);
                     String nickname_ = keys.child("nickname").getValue(String.class);
                     String message = keys.child("message").getValue(String.class);
                     String time = keys.child("time").getValue(String.class);
-                    ChatMessage chat = new ChatMessage(nickname_, message, time);
+                    ChatMessage chat = new ChatMessage(id_, nickname_, message, time);
                     if(nickname_.equals(nickname)){
                         chat.setGravity(1);
                     }
@@ -110,10 +113,11 @@ public class FragmentChat extends Fragment {
                 for(DataSnapshot keys : snapshot.getChildren()){
                     count++;
                     if(count>adapter.getCount()){
+                        String id_ = keys.child("id").getValue(String.class);
                         String nickname_ = keys.child("nickname").getValue(String.class);
                         String message = keys.child("message").getValue(String.class);
                         String time = keys.child("time").getValue(String.class);
-                        ChatMessage chat = new ChatMessage(nickname_, message, time);
+                        ChatMessage chat = new ChatMessage(id_, nickname_, message, time);
                         if(nickname_.equals(nickname)){
                             chat.setGravity(1);
                         }

@@ -72,7 +72,7 @@ public class PrivatechatActivity extends AppCompatActivity {
                 if(message.equals("")){
                     return;
                 }
-                ChatMessage chat = new ChatMessage(nickname, message, format1.format(new Date()));
+                ChatMessage chat = new ChatMessage(id, nickname, message, format1.format(new Date()));
                 databaseReference.child("chatRooms").child(roomKey).push().setValue(chat);
                 messageView.setText("");
             }
@@ -89,10 +89,11 @@ public class PrivatechatActivity extends AppCompatActivity {
                     return;
                 }
                 for(DataSnapshot keys : snapshot.getChildren()){
+                    String id_ = keys.child("id").getValue(String.class);
                     String nickname_ = keys.child("nickname").getValue(String.class);
                     String message = keys.child("message").getValue(String.class);
                     String time = keys.child("time").getValue(String.class);
-                    ChatMessage chat = new ChatMessage(nickname_, message, time);
+                    ChatMessage chat = new ChatMessage(id_, nickname_, message, time);
                     /*if(nickname_.equals(nickname)){
                         chat.setGravity(1);
                     }
@@ -123,10 +124,11 @@ public class PrivatechatActivity extends AppCompatActivity {
                 for(DataSnapshot keys : snapshot.getChildren()){
                     count++;
                     if(count>adapter.getCount()){
+                        String id_ = keys.child("id").getValue(String.class);
                         String nickname_ = keys.child("nickname").getValue(String.class);
                         String message = keys.child("message").getValue(String.class);
                         String time = keys.child("time").getValue(String.class);
-                        ChatMessage chat = new ChatMessage(nickname_, message, time);
+                        ChatMessage chat = new ChatMessage(id_, nickname_, message, time);
                         if(nickname_.equals(nickname)){
                             chat.setGravity(1);
                         }

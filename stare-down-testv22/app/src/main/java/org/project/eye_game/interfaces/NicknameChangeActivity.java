@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,6 +103,7 @@ public class NicknameChangeActivity extends AppCompatActivity {
                             }
 
                         }
+                        id = getIntent().getExtras().getString("id");
                         isChange = true;
                         nickname = newNickname;
                         userRef.child("nickname").setValue(newNickname);
@@ -148,6 +150,41 @@ public class NicknameChangeActivity extends AppCompatActivity {
                                     for(DataSnapshot k: keys.getChildren()){
                                         if(k.child("friendID").getValue(String.class).equals(id)&&isChange){
                                             k.getRef().child("friendNickname").setValue(newNickname);
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        databaseReference.child("GlobalChat").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot keys: snapshot.getChildren()){
+                                    Log.d("NICKNAME", id + " " + isChange);
+                                    if(keys.child("id").getValue(String.class).equals(id)&&isChange){
+                                        keys.child("nickname").getRef().setValue(newNickname);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        databaseReference.child("chatRooms").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot keys: snapshot.getChildren()){
+                                    for(DataSnapshot k: keys.getChildren()){
+                                        if(k.child("id").getValue(String.class).equals(id)&&isChange){
+                                            k.child("nickname").getRef().setValue(newNickname);
                                         }
                                     }
                                 }

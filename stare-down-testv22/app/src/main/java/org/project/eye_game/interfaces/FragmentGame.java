@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +21,7 @@ import org.project.eye_game.characterChange.GameOneActivity;
 
 public class FragmentGame extends Fragment {
 
-    ImageView card1;
+    TextView card1;
     ImageView card2;
     ImageView card3;
 

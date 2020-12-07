@@ -1,16 +1,26 @@
 package org.project.eye_game.interfaces;
 
 public class ChatMessage {
+    String id;
     String nickname;
     String message;
     String time;
     int gravity;
 
-    public ChatMessage(String nickname, String message, String time){
+    public ChatMessage(String id, String nickname, String message, String time){
+        this.id = id;
         this.message = message;
         this.nickname = nickname;
         this.time = time;
         this.gravity = 0;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getGravity() {

@@ -91,6 +91,7 @@ public class FragmentActivity extends AppCompatActivity {
                 case R.id.chat_menu:
                     transaction.replace(R.id.frameLayout, fragmentChat).addToBackStack(null).commitAllowingStateLoss();
                     Bundle bundle_chat = new Bundle();
+                    bundle_chat.putString("id", id);
                     bundle_chat.putString("nickname",nickname);
                     fragmentChat.setArguments(bundle_chat);
                     break;

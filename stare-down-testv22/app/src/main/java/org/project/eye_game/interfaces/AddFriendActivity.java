@@ -151,7 +151,7 @@ public class AddFriendActivity extends AppCompatActivity {
                             return;
                         }
                     }
-                    databaseReference.child("chatRooms").child(friend.roomKey).push().setValue(new ChatMessage(nickname, "Hi!", format1.format(new Date())));
+                    databaseReference.child("chatRooms").child(friend.roomKey).push().setValue(new ChatMessage(id, nickname, "Hi!", format1.format(new Date())));
                     databaseReference.child("friendList").child(id).push().setValue(friend);
                     databaseReference.child("friendList").child(TargetID).push().setValue(user);
                 }
