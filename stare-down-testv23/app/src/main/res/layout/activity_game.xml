@@ -12,24 +12,25 @@
         android:layout_height="match_parent"
         android:background="@color/pastel_green"
         android:scaleType="centerCrop"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="-16dp" />
 
     <TextView
         android:id="@+id/characterView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="20dp"
         android:background="#55112299"
         android:backgroundTint="#88112299"
         android:padding="10dp"
         android:text="Character"
         android:textColor="#ff112266"
         android:textSize="20dp"
-        android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/gameCard1"
         app:layout_constraintTop_toBottomOf="@+id/MenuTitleTextView"
-        app:layout_constraintVertical_bias="0.279" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <ImageView
         android:id="@+id/gameCard2"
@@ -92,6 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:background="#55112299"
         android:backgroundTint="#88112299"
@@ -99,17 +101,17 @@
         android:text="Racing Game"
         android:textColor="#ff112266"
         android:textSize="20dp"
-        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/gameCard2"
         app:layout_constraintTop_toBottomOf="@+id/characterView"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.27" />
 
     <TextView
         android:id="@+id/TetrisTitleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:background="#55112299"
         android:backgroundTint="#88112299"
@@ -117,11 +119,10 @@
         android:text="Tetris Game"
         android:textColor="#ff112266"
         android:textSize="20dp"
-        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/gameCard3"
         app:layout_constraintTop_toBottomOf="@+id/RacingTitleView"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.494" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
