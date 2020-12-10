@@ -33,4 +33,4 @@
 
 [GitHub] https://github.com/jollytris/MyFirstGame
 
-[icon] flaticon.com
+[icon] https://www.flaticon.com
