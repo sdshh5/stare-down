@@ -11,45 +11,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pastel_green"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="-16dp" />
 
     <TextView
-        android:id="@+id/gameCard1"
-        android:layout_width="wrap_content"
+        android:id="@+id/characterView"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="30dp"
         android:background="#55112299"
         android:backgroundTint="#88112299"
-        android:text="CHARACTER CHANGE★"
-        android:textColor="#ff112266"
-        android:textSize="25dp"
         android:padding="10dp"
-        app:layout_constraintVertical_bias="0.6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Character Change"
+        android:textColor="#ff112266"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gameCard1"
+        app:layout_constraintStart_toEndOf="@+id/gameCard1"
+        app:layout_constraintTop_toTopOf="@+id/gameCard1" />
+
+    <ImageView
+        android:id="@+id/gameCard2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/racing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameCard1" />
+
+    <ImageView
+        android:id="@+id/gameCard3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/game_card3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameCard2" />
 
     <ImageView
-        android:id="@+id/gameCard2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginHorizontal="30dp"
-        android:src="@drawable/game_card2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/gameCard1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/character_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MenuTitleTextView"
-        app:layout_constraintVertical_bias="0.25" />
-
-    <ImageView
-        android:id="@+id/gameCard3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginHorizontal="30dp"
-        android:src="@drawable/tetris"
-        app:layout_constraintBottom_toBottomOf="@+id/main_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MenuTitleTextView"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toBottomOf="@+id/MenuTitleTextView" />
 
     <TextView
         android:id="@+id/MenuTitleTextView"
@@ -66,6 +78,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/RacingTitleView"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:background="#55112299"
+        android:backgroundTint="#88112299"
+        android:padding="10dp"
+        android:text="Racing Game"
+        android:textColor="#ff112266"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gameCard2"
+        app:layout_constraintLeft_toRightOf="@id/gameCard2"
+        app:layout_constraintTop_toTopOf="@+id/gameCard2" />
+
+    <TextView
+        android:id="@+id/TetrisTitleView"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:background="#55112299"
+        android:backgroundTint="#88112299"
+        android:padding="10dp"
+        android:text="Tetris Game"
+        android:textColor="#ff112266"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gameCard3"
+        app:layout_constraintLeft_toRightOf="@id/gameCard3"
+        app:layout_constraintTop_toTopOf="@+id/gameCard3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

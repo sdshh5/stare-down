@@ -22,8 +22,8 @@ import org.project.eye_game.characterChange.GameOneActivity;
 public class FragmentGame extends Fragment {
 
     TextView card1;
-    ImageView card2;
-    ImageView card3;
+    TextView card2;
+    TextView card3;
 
     String nickname;
     int CHARACTER_ID;
@@ -47,7 +47,7 @@ public class FragmentGame extends Fragment {
             CHARACTER_ID = bundle.getInt("characterID");
         }
 
-        card1 = gameView.findViewById(R.id.gameCard1);
+        card1 = gameView.findViewById(R.id.characterView);
         card1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -61,7 +61,7 @@ public class FragmentGame extends Fragment {
             }
         });
 
-        card2 = gameView.findViewById(R.id.gameCard2);
+        card2 = gameView.findViewById(R.id.RacingTitleView);
         card2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -75,7 +75,7 @@ public class FragmentGame extends Fragment {
             }
         });
 
-        card3 = gameView.findViewById(R.id.gameCard3);
+        card3 = gameView.findViewById(R.id.TetrisTitleView);
         card3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
