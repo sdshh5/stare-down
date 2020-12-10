@@ -20,7 +20,9 @@
 ------------------------
 
 ## Tetris Game
-https://github.com/chobocho/AndroidTetris
+
+### References
+[GitHub] https://github.com/chobocho/AndroidTetris
 
 ------------------------
 
