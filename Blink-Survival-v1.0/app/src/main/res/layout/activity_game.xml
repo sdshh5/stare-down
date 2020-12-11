@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="5dp"
     android:background="@color/pastel_green"
     tools:context=".interfaces.FragmentGame">
 
@@ -13,9 +14,8 @@
         android:id="@+id/MenuTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="50dp"
+        android:layout_margin="10dp"
+        android:layout_weight="2"
         android:gravity="center"
         android:background="#88ffffff"
         android:backgroundTint="#55ffffff"
@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
+        android:layout_weight="3"
         >
 
         <ImageView
@@ -64,6 +65,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
+        android:layout_weight="3"
         >
 
         <ImageView
@@ -97,6 +99,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
+        android:layout_weight="3"
         >
 
         <ImageView
@@ -123,7 +126,15 @@
             android:text="Tetris Game"
             android:textColor="#ff112266"
             android:textSize="20dp" />
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Button" />
 
 
 </LinearLayout>
