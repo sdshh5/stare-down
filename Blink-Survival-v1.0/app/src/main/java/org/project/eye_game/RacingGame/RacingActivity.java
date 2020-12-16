@@ -2,6 +2,7 @@ package org.project.eye_game.RacingGame;
 
 import org.project.eye_game.interfaces.*;
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -281,6 +282,9 @@ public class RacingActivity extends AppCompatActivity {
                             int minScore = 0;
                             boolean alreadyExist = false;
                             for(DataSnapshot keys: snapshot.getChildren()){
+                                if(i>=10){
+                                    break;
+                                }
                                 xx[i++] = new RankData(keys.child("id").getValue(String.class),
                                         keys.child("nickname").getValue(String.class),
                                         keys.child("score").getValue(int.class),

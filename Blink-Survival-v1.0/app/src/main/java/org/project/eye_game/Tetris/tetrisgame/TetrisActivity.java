@@ -213,6 +213,9 @@ public class TetrisActivity extends AppCompatActivity {
                     int minScore = 0;
                     boolean alreadyExist = false;
                     for(DataSnapshot keys: snapshot.getChildren()){
+                        if(i>=10){
+                            break;
+                        }
                         xx[i++] = new RankData(keys.child("id").getValue(String.class),
                                 keys.child("nickname").getValue(String.class),
                                 keys.child("score").getValue(int.class),
